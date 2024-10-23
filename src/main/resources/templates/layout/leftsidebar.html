@@ -1,0 +1,148 @@
+<ul th:fragment="leftSide_bar"
+			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+
+			<!-- Sidebar - Brand -->
+			<a
+				class="sidebar-brand d-flex align-items-center justify-content-center"
+				th:href="@{/}">
+				<div class="sidebar-brand-icon rotate-n-15">
+					<i class="fas fa-laugh-wink"></i>
+				</div>
+				<div class="sidebar-brand-text mx-3">
+					Administrador <sup>1</sup>
+				</div>
+			</a>
+
+			<!-- Divider -->
+			<hr class="sidebar-divider my-0">
+
+			<!-- Nav Item - Dashboard -->
+			<li class="nav-item active"><a class="nav-link"
+				th:href="@{/}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span></a>
+			</li>
+
+			<!-- Divider -->
+			<hr class="sidebar-divider">
+
+			<!-- Heading -->
+			<div class="sidebar-heading">Configuración</div>
+
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseSeg"
+				aria-expanded="true" aria-controls="collapseeg"> <i
+					class="fas fa-fw fa-cog"></i> <span>Seguridad</span>
+			</a>
+				<div id="collapseSeg" class="collapse" aria-labelledby="headingSeg"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Opciones:</h6>
+						<a class="collapse-item" th:href="@{/views/usuarios/}">Usuarios</a> 
+						<a	class="collapse-item" th:href="@{/views/perfiles/}">Perfiles</a>
+						<a	class="collapse-item" th:href="@{/views/sesiones/}">Sesiones</a>
+						<a	class="collapse-item" th:href="@{/views/sesionesperfil/}">Sesiones por Perfil</a>
+						<a	class="collapse-item" th:href="@{/views/sesionesusuario/}">Sesiones por Usuario</a>
+					</div>
+				</div></li>
+
+			<!-- Divider -->
+			<hr class="sidebar-divider">
+
+			<!-- Heading -->
+			<div class="sidebar-heading">Proceso</div>
+
+			<!-- Nav Item - Datos Básicos Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseDatBas"
+				aria-expanded="true" aria-controls="collapseDatBas"> <i
+					class="fas fa-home"></i> <span>Datos Básicos</span>
+			</a>
+				<div id="collapseDatBas" class="collapse"
+					aria-labelledby="headingDatBas" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Opciones:</h6>
+						<a class="collapse-item" th:href="@{/views/paises/}">Paises</a>
+						<a class="collapse-item" th:href="@{/views/departamentos/}">Departamentos</a>
+						<a class="collapse-item" th:href="@{/views/ciudades/}">Ciudades</a>
+						<a class="collapse-item" th:href="@{/views/localidades/}">Localidades</a>
+						<a class="collapse-item" th:href="@{/views/barrios/}">Barrios</a>
+						<a class="collapse-item" th:href="@{/views/colegios/}">Colegios</a>
+						<a class="collapse-item" th:href="@{/views/tiposident/}">Tipos de Identificación</a>
+						<a class="collapse-item" th:href="@{/views/servicios/}">Servicios</a>
+						<a class="collapse-item" th:href="@{/views/cargos/}">Cargos</a>
+						<a class="collapse-item" th:href="@{/views/eps/}">EPS's</a>
+						<a class="collapse-item" th:href="@{/views/profesiones/}">Profesiones</a>
+						<a class="collapse-item" th:href="@{/views/rechumano/}">Recurso Humano</a>
+						<a class="collapse-item" th:href="@{/views/directivos/}">Directivos</a>
+						<a class="collapse-item" th:href="@{/views/horarios/}">Horarios</a>
+						<a class="collapse-item" th:href="@{/views/grados/}">Grados</a>
+					</div>
+				</div></li>
+	
+			<!-- Divider -->
+			<hr class="sidebar-divider">
+			
+			<!-- Nav Item - Admisiones Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseAdmis"
+				aria-expanded="true" aria-controls="collapseAdmis"> <i
+					class="fas fa-cog"></i> <span>Admisiones</span>
+			</a>
+				<div id="collapseAdmis" class="collapse"
+					aria-labelledby="headingAdmis" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Opciones:</h6>
+						<a class="collapse-item" th:href="@{/views/alumnosbas/}">Datos Básicos Alumnos</a>
+						<a class="collapse-item" th:href="@{/views/alumnosfam/}">Datos Familiares</a>
+						<a class="collapse-item" th:href="@{/views/alumnosdoc/}">Documentos</a>
+						<a class="collapse-item" th:href="@{/views/grados/}">Proceso Admision</a>						
+					</div>
+				</div></li>
+			
+			<!-- Divider -->
+			<hr class="sidebar-divider d-none d-md-block">
+			
+			<!-- Nav Item - Cursos Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseCurs"
+				aria-expanded="true" aria-controls="collapseCurs"> <i
+					class="fas fa-sliders-h"></i> <span>Cursos</span>
+			</a>
+				<div id="collapseCurs" class="collapse"
+					aria-labelledby="headingCurs" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Opciones:</h6>
+						<a class="collapse-item" href="login.html">Cursos</a>
+						<a class="collapse-item" href="register.html">Alumnos por Curso</a>
+					</div>
+				</div></li>
+				
+			<!-- Divider -->
+			<hr class="sidebar-divider d-none d-md-block">
+			
+			<!-- Nav Item - Notas Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseNotas"
+				aria-expanded="true" aria-controls="collapseNotas"> <i
+					class="fas fa-user-circle"></i> <span>Notas</span>
+			</a>
+				<div id="collapseNotas" class="collapse"
+					aria-labelledby="headingNotas" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Opciones:</h6>
+						<a class="collapse-item" href="login.html">Parametros</a>
+						<div class="collapse-divider"></div>
+						<a class="collapse-item" href="register.html">Proceso Calificación</a>						
+					</div>
+				</div></li>
+				
+			<!-- Divider -->
+			<hr class="sidebar-divider d-none d-md-block">
+
+			<!-- Sidebar Toggler (Sidebar) -->
+			<div class="text-center d-none d-md-inline">
+				<button class="rounded-circle border-0" id="sidebarToggle"></button>
+			</div>
+
+		</ul>
