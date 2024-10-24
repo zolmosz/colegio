@@ -14,6 +14,8 @@ import com.uan.colegio.service.UsuariosService;
 import com.uan.colegio.utils.EncriptaSHA3;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class InicioController {
@@ -30,7 +32,7 @@ public class InicioController {
 		return "login";
 	}
 	
-	@GetMapping(value={"/logout"})
+	@PostMapping(value={"/logout"})
 	public String logout() {
 		return "/login";
 	}

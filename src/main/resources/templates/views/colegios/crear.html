@@ -48,9 +48,9 @@
 											<div class="form-row">
 												<div class="form-group col-md-6">
 													<input type="hidden" th:field="*{coLlave}">
-													<label for="coCodigo">Código</label> <input type="text"
+													<label for="coCodigo">Cï¿½digo</label> <input type="text"
 														class="form-control" id="coCodigo"
-														placeholder="Código Colegio" th:field="*{coCodigo}">
+														placeholder="Cï¿½digo Colegio" th:field="*{coCodigo}">
 												</div>
 												<div class="form-group col-md-6">
 													<label for="coNombre">Nombre</label> <input
@@ -58,28 +58,28 @@
 														placeholder="Nombre de colegio" th:field="*{coNombre}">
 												</div>
 												<div class="form-group col-md-6">
-													<label for="coIdentificacion">Identificación</label> <input
+													<label for="coIdentificacion">Identificaciï¿½n</label> <input
 														type="text" class="form-control" id="coIdentificacion"
 														placeholder="Identificacion" th:field="*{coIdentificacion}">
 												</div>
 												<div class="form-group col-md-6">
-													<label for="coDigitoVer">Digito verificación</label> <input
+													<label for="coDigitoVer">Digito verificaciï¿½n</label> <input
 														type="text" class="form-control" id="coDigitoVer"
 														placeholder="Digito Verificacion" th:field="*{coDigitoVer}">
 												</div>
 												<div class="form-group col-md-6">
-													<label for="coDireccion">Dirección</label> <input
+													<label for="coDireccion">Direcciï¿½n</label> <input
 														type="text" class="form-control" id="coDireccion"
 														placeholder="Direccion" th:field="*{coDireccion}">
 												</div>
 												<div class="form-group col-md-6">
-													<label for="coTelefono">Teléfono</label> <input
+													<label for="coTelefono">Telï¿½fono</label> <input
 														type="text" class="form-control" id="coTelefono"
-														placeholder="Teléfono" th:field="*{coTelefono}">
+														placeholder="Telï¿½fono" th:field="*{coTelefono}">
 												</div>
 												<div class="col-md-6 mb-4" >
 													<label for="coPais">Pais</label>
-													<select class="form-control" id="coPais" th:field="*{coPais}">
+													<select class="form-control" id="coPais" th:field="*{PaisesDto.paLlave}">
 														<option th:each="pais:${paises}"
 															th:value="${pais.paLlave}"
 															th:text="${pais.paNombrepais}"
@@ -88,7 +88,7 @@
 												</div>
 												<div class="col-md-6 mb-4" >
 													<label for="coDepartamento">Departamento</label>
-													<select class="form-control" id="coDepartamento" th:field="*{coDepartamento}">
+													<select class="form-control" id="coDepartamento" th:field="*{DepartamentosDto.dpLlave}">
 														<option th:each="depto:${departamentos}"
 															th:value="${depto.dpLlave}"
 															th:text="${depto.dpNombre}"
@@ -97,7 +97,7 @@
 												</div>
 												<div class="col-md-6 mb-4" >
 													<label for="coCiudad">Ciudad</label>
-													<select class="form-control" id="coCiudad" th:field="*{coCiudad}">
+													<select class="form-control" id="coCiudad" th:field="*{CiudadesDto.ciLlave}">
 														<option th:each="ci:${ciudades}"
 															th:value="${ci.ciLlave}"
 															th:text="${ci.ciNombre}"
@@ -110,9 +110,9 @@
 														placeholder="E-mail" th:field="*{coEmail}">
 												</div>
 												<div class="form-group col-md-6">
-													<label for="coRegeducacion">Registro Educación</label> <input
+													<label for="coRegeducacion">Registro Educaciï¿½n</label> <input
 														type="text" class="form-control" id="coRegeducacion"
-														placeholder="Registro Educación" th:field="*{coRegeducacion}">
+														placeholder="Registro Educaciï¿½n" th:field="*{coRegeducacion}">
 												</div>
 												<div class="form-group col-md-6">
 													<label for="coEstado">Estado</label> <input
