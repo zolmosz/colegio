@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.uan.colegio.dto.CiudadesDto;
+import com.uan.colegio.dto.LocalidadesDto;
 import com.uan.colegio.dto.PaisesDto;
+import com.uan.colegio.dto.CiudadesDto;
 import com.uan.colegio.dto.DepartamentosDto;
+import com.uan.colegio.service.LocalidadesService;
 import com.uan.colegio.service.CiudadesService;
 import com.uan.colegio.service.DepartamentosService;
 import com.uan.colegio.service.PaisesService;
@@ -23,8 +25,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/views/ciudades")
-public class CiudadesController {
+@RequestMapping("/views/localidades")
+public class LocalidadesController {
 	
 
 	@Autowired
@@ -32,65 +34,72 @@ public class CiudadesController {
 	@Autowired
 	private DepartamentosService departamentossrv;
 	@Autowired
-	private CiudadesService ciudadesrv;
+	private CiudadesService ciudadessrv;
+	@Autowired
+	private LocalidadesService localidadesrv;
+	
 	
 	
 	@GetMapping("/")
-	public String listarCiudades(Model model, HttpSession sesion) {
-		List<CiudadesDto> listaDtoCiudades = ciudadesrv.findAll();
+	public String listarLocalidades(Model model, HttpSession sesion) {
+		List<LocalidadesDto> listaDtoLocalidades = localidadesrv.findAll();
 		
-		model.addAttribute("titulo","Lista de Ciudades");
-		model.addAttribute("ciudades",listaDtoCiudades);
+		model.addAttribute("titulo","Lista de Localidades");
+		model.addAttribute("localidades",listaDtoLocalidades);
 		model.addAttribute("usuario_ses", sesion.getAttribute("fname") +" " + sesion.getAttribute("lname"));
 		
-		return "views/ciudades/listar";
+		return "views/localidades/listar";
 	}
 	
 	@GetMapping("/create")
 	public String create(Model model, HttpSession sesion) {
 		
-		CiudadesDto CiudadesDto = new CiudadesDto();
+		LocalidadesDto localidadesDto = new LocalidadesDto();
 		List<PaisesDto> listaDtoPaises = paissrv.findAll();
 		List<DepartamentosDto> listaDtoDepartamentos = departamentossrv.findAll();
+		List<CiudadesDto> listaDtoCiudades = ciudadessrv.findAll();
 		
-		model.addAttribute("titulo","Formulario nueva Ciudad");
-		model.addAttribute("ciudad", CiudadesDto);
+		model.addAttribute("titulo","Formulario nueva Localidad");
+		model.addAttribute("localidad", localidadesDto);
+		model.addAttribute("ciudades", listaDtoCiudades);
 		model.addAttribute("paises", listaDtoPaises);
 		model.addAttribute("departamentos", listaDtoDepartamentos);
 		model.addAttribute("usuario_ses", sesion.getAttribute("fname") +" " + sesion.getAttribute("lname"));
 		
-		return "views/ciudades/crear";
+		return "views/localidades/crear";
 	}
 	
 	@PostMapping("/salvar")
-	public String salvarCiudades(@ModelAttribute CiudadesDto CiudadesDto) {
+	public String salvarLocalidades(@ModelAttribute LocalidadesDto localidadesDto) {
 		
-		ciudadesrv.save(CiudadesDto);
+		localidadesrv.save(localidadesDto);
 		
-		return "redirect:/views/ciudades/";
+		return "redirect:/views/localidades/";
 	}
 	
 	@GetMapping("/editar/{id}")
 	public String create(@PathVariable("id") UUID idciudad,  Model model, HttpSession sesion) {
 		
-		CiudadesDto ciudadesDto = ciudadesrv.findByid(idciudad);
+		LocalidadesDto localidadesDto = localidadesrv.findByid(idciudad);
 		List<PaisesDto> listaDtoPaises = paissrv.findAll();
 		List<DepartamentosDto> listaDtoDepartamentos = departamentossrv.findAll();
+		List<CiudadesDto> listaDtoCiudades = ciudadessrv.findAll();
 		
-		model.addAttribute("titulo","Formulario nueva Ciudad");
-		model.addAttribute("ciudad", ciudadesDto);
+		model.addAttribute("titulo","Formulario nueva Localidad");
+		model.addAttribute("localidad", localidadesDto);
+		model.addAttribute("ciudades", listaDtoCiudades);
 		model.addAttribute("paises", listaDtoPaises);
 		model.addAttribute("departamentos", listaDtoDepartamentos);
 		model.addAttribute("usuario_ses", sesion.getAttribute("fname") +" " + sesion.getAttribute("lname"));
 		
-		return "views/ciudades/crear";
+		return "views/localidades/crear";
 	}
 	
 	@GetMapping("/eliminar/{id}")
-	public String eliminar(@PathVariable("id") UUID idciudad,  Model model, HttpSession sesion) {
+	public String eliminar(@PathVariable("id") UUID idlocalidad,  Model model, HttpSession sesion) {
 		
-		ciudadesrv.deleteById(idciudad);
+		localidadesrv.deleteById(idlocalidad);
 		
-		return "redirect:/views/ciudades/";
+		return "redirect:/views/localidades/";
 	}
 }

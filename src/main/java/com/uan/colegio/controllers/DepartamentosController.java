@@ -48,7 +48,7 @@ public class DepartamentosController {
 		DepartamentosDto DepartamentosDto = new DepartamentosDto();
 		List<PaisesDto> listaDtoPaises = paissrv.findAll();
 		
-		model.addAttribute("titulo","Formulario nuevo departamento");
+		model.addAttribute("titulo","Formulario nuevo Departamento");
 		model.addAttribute("departamento", DepartamentosDto);
 		model.addAttribute("paises", listaDtoPaises);
 		model.addAttribute("usuario_ses", sesion.getAttribute("fname") +" " + sesion.getAttribute("lname"));
@@ -70,7 +70,7 @@ public class DepartamentosController {
 		DepartamentosDto departamentosDto = departamentosrv.findByid(iddepartamento);
 		List<PaisesDto> listaDtoPaises = paissrv.findAll();
 		
-		model.addAttribute("titulo","Formulario nuevo departamento");
+		model.addAttribute("titulo","Formulario nuevo Departamento");
 		model.addAttribute("departamento", departamentosDto);
 		model.addAttribute("paises", listaDtoPaises);
 		model.addAttribute("usuario_ses", sesion.getAttribute("fname") +" " + sesion.getAttribute("lname"));

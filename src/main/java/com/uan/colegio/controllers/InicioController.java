@@ -9,12 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.uan.colegio.dto.LoginRequest;
-import com.uan.colegio.dto.UsuariosDto;
 import com.uan.colegio.service.UsuariosService;
 import com.uan.colegio.utils.EncriptaSHA3;
 
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
