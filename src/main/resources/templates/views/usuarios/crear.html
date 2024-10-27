@@ -64,7 +64,7 @@
                             th:field="*{usCodigo}"
                           />
                         </div>
-						<div class="form-group col-md-6">
+						<!-- <div class="form-group col-md-6">
 							<label for="usClave">Contraseña</label>
 							<input 
 								type="password" 
@@ -75,7 +75,7 @@
 								<div class="input-group-addon">
 									<a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
 								</div>
-						</div>
+						</div> -->
                         <div class="form-group col-md-6">
                           <label for="usDescripcion">Descripci�n</label>
                           <input
@@ -118,11 +118,7 @@
                         </div>
                         <div class="col-md-6 mb-4">
                           <label for="usPerfil">Perfil</label>
-                          <select
-                            class="form-control"
-                            id="usPerfil"
-                            th:field="*{PerfilesDto.peLlave}"
-                          >
+                          <select class="form-control" id="usPerfil" th:field="*{PerfilesDto.peLlave}" >
                             <option
                               th:each="pe:${perfiles}"
                               th:value="${pe.peLlave}"
@@ -132,11 +128,7 @@
                         </div>
                         <div class="col-md-6 mb-4">
                           <label for="usColegio">Colegio</label>
-                          <select
-                            class="form-control"
-                            id="usColegio"
-                            th:field="*{ColegiosDto.coLlave}"
-                          >
+                          <select class="form-control" id="usColegio" th:field="*{ColegiosDto.coLlave}" >
                             <option
                               th:each="col:${colegios}"
                               th:value="${col.coLlave}"
