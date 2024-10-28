@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
+    <!-- <meta charset="ISO-8859-1"> -->
+    <meta charset="UTF-8" />
+    <title></title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <lu th:replace="layout/leftsidebar :: leftSide_bar"></lu>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <nav th:replace="layout/topnavbar :: top_navbar"></nav>
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid" layout:fragment="page-content">
+            <!-- 									/.container-fluid -->
+            <h1 th:text="${titulo}"></h1>
+
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="card shadow mb-4">
+                  <!-- Card Header - Dropdown -->
+                  <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                  >
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      Crear Recurso Humano
+                    </h6>
+                  </div>
+                  <div class="card-body">
+                    <form
+                      th:object="${rechumano}"
+                      th:action="@{/views/rechumano/salvar}"
+                      method="post"
+                    >
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <input type="hidden" th:field="*{rhLlave}" />
+                          <label for="rhCodigo">Código Recurso Humano</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="rhCodigo"
+                            placeholder="Código Recurso Humano"
+                            th:field="*{rhCodigo}"
+                          />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="rhNombres">Nombres</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="rhNombres"
+                            placeholder="Nombres Recurso Humano"
+                            th:field="*{rhNombres}"
+                          />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="rhApellidos">Apellidos</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="rhApellidos"
+                            placeholder="Apellidos Recurso Humano"
+                            th:field="*{rhApellidos}"
+                          />
+                        </div>
+                      <div class="form-row">
+                        <div class="col-md-6 mb-4">
+                          <label for="rhTipoIdent">Tipos de Identificación</label>
+                          <select class="form-control" id="rhTipoIdent" th:field="*{TiposIdentificacionDto.tiLlave}" >
+                            <option
+                              th:each="ti:${tipident}"
+                              th:value="${ti.tiLlave}"
+                              th:text="${ti.tiDesc}"
+                            />
+                          </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="rhIdentificacion">Número Identificación</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="rhIdentificacion"
+                            placeholder="Número de Identificación Recurso Humano"
+                            th:field="*{rhIdentificacion}"
+                          />
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <label for="rhLugarExp">Lugar de Expedición</label>
+                          <select class="form-control" id="rhLugarExp" th:field="*{CiudadesDto.ciLlave}" >
+                            <option
+                              th:each="ci:${ciudades}"
+                              th:value="${ci.ciLlave}"
+                              th:text="${ci.ciNombre}"
+                            />
+                          </select>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <label for="usColegio">Colegio</label>
+                          <select class="form-control" id="usColegio" th:field="*{ColegiosDto.coLlave}" >
+                            <option
+                              th:each="col:${colegios}"
+                              th:value="${col.coLlave}"
+                              th:text="${col.coNombre}"
+                            />
+                          </select>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <label for="rhCargo">Cargo</label>
+                          <select class="form-control" id="rhCargo" th:field="*{CargosDto.cgLlave}" >
+                            <option
+                              th:each="cg:${cargos}"
+                              th:value="${cg.cgLlave}"
+                              th:text="${cg.cgNombre}"
+                            />
+                          </select>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <label for="rhProfesion">Profesión</label>
+                          <select class="form-control" id="rhProfesion" th:field="*{ProfesionesDto.prLlave}" >
+                            <option
+                              th:each="pr:${profesiones}"
+                              th:value="${pr.prLlave}"
+                              th:text="${pr.prNombre}"
+                            />
+                          </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="rhDireccion">Dirección</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="rhDireccion"
+                            placeholder="Dirección Recurso Humano"
+                            th:field="*{rhDireccionRes}"
+                          />
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <label for="rhBarrio">Barrio</label>
+                          <select class="form-control" id="rhBarrio" th:field="*{BarriosDto.baLlave}" >
+                            <option
+                              th:each="ba:${barrios}"
+                              th:value="${ba.baLlave}"
+                              th:text="${ba.baNombre}"
+                            />
+                          </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="rhTelefonoRes">Teléfono Residencia</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="rhTelefonoRes"
+                            placeholder="Telefono Residencia "
+                            th:field="*{rhTelefonoRes}"
+                          />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="rhTelefonoMov">Teléfono Móvil</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="rhTelefonoMov"
+                            placeholder="Teléfono Movil "
+                            th:field="*{rhTelefonoMovil}"
+                          />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="usEmail">E-mail</label>
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="rhEmail"
+                            placeholder="E-mail Recurso"
+                            th:field="*{rhEmail}"
+                          />
+                        </div>
+                        <div class="form-check form-switch col-md-3">                            
+                          <input class="form-check-input" type="checkbox" id="rhEstado" th:field="*{rhEstado}">
+                          <label for="rhEstado" class="form-check-label" > Estado</label>
+                        </div>
+                      </div>
+                      <div
+                        class="card-footer col-sm-12 col-md-12 col-lg-12 mb-3 mb-sm-0"
+                      >
+                        <input
+                          type="submit"
+                          class="btn btn-primary"
+                          value="Guardar"
+                        />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End of Main Content -->
+          <footer th:replace="layout/footer :: _footer"></footer>
+        </div>
+      </div>
+    </div>
+    <!-- End of Content Wrapper -->
+
+    <a th:replace="layout/modallogout :: stopbot"></a>
+
+    <div th:replace="layout/modallogout :: modal_logout"></div>
+
+    <!-- 	Modal para crear usuario -->
+
+    <!-- Fin Modal -->
+    <!-- Bootstrap core JavaScript-->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+    <!-- Page level plugins -->
+    <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+
+    <!-- Page level custom scripts -->
+    <script th:src="@{/js/demo/chart-area-demo.js}"></script>
+    <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+  </body>
+</html>

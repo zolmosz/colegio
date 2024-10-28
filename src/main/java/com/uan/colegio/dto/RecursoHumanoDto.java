@@ -3,6 +3,8 @@ package com.uan.colegio.dto;
 
 import java.util.UUID;
 
+import com.uan.colegio.entity.Cargos;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,18 +14,18 @@ import lombok.NoArgsConstructor;
 @Data
 public class RecursoHumanoDto {
 	private UUID rhLlave;
-	private UUID rhColegio;
-	private UUID rhTipoIdent;
+	private ColegiosDto colegiosDto;
+	private TiposIdentificacionDto tiposIdentificacionDto;
 	private String rhIdentificacion;
-	private UUID rhProfesion;
-	private UUID rhCargo;
+	private ProfesionesDto profesionesDto;
+	private CargosDto cargosDto;
 	private String rhCodigo;
 	private String rhNombres;
 	private String rhApellidos;
-	private UUID rhLugarExp;
+	private CiudadesDto ciudadesDto;
 	private String rhDireccionRes;
 	private String rhTelefonoRes;
-	private UUID rhBarrioRes;
+	private BarriosDto barriosDto;
 	private String rhTelefonoMovil;
 	private String rhEmail;
     private Boolean rhEstado;

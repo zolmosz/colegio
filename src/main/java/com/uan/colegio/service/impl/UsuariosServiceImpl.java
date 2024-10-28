@@ -46,6 +46,8 @@ public class UsuariosServiceImpl extends GenericServiceImpl<Usuarios, UUID> impl
 	public UsuariosDto findByid(UUID id) {
 		Optional<Usuarios> usuario = this.usuariosDao.findById(id);
 		UsuariosDto usuarioDto = MHelpers.modelMapper().map(usuario.get(), UsuariosDto.class);
+		usuarioDto.setPerfilesDto(MHelpers.modelMapper().map(usuario.get().getPerfiles(), PerfilesDto.class));
+		usuarioDto.setColegiosDto(MHelpers.modelMapper().map(usuario.get().getColegios(), ColegiosDto.class));
 
 		return usuarioDto;
 	}
