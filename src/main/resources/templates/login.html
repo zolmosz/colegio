@@ -37,7 +37,7 @@
 												<div class="col mr-2">
 												</div>
 												<div class="col-auto">
-													<img th:src="@{/img/logo-colegio.jpg}" />
+													<img th:src="@{/img/logo-col.png}" />
 												</div>
 											</div>
 									</div>
@@ -68,9 +68,6 @@
 										<div><input type="submit" value="Login"
 												class="btn btn-google btn-user btn-block" /></div>
 										<hr>
-											<p>Resultado SHA-3 512:</p>
-    										<pre id="result"></pre>
-    										<pre id= "password"></pre>
 											<p style="font-size: 24px; color: cornflowerblue;" th:if="${param.logout}">Sesión de usuario finalizada</p>
 											<p style="font-size: 24px; color: red;" th:if="${param.error}">Usuario o contraseña errada</p>
 									</form>

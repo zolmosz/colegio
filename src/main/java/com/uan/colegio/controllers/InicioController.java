@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.uan.colegio.entity.Usuarios;
@@ -33,11 +34,13 @@ public class InicioController {
 	}
 	
 	@GetMapping("/access")
-	public String access(HttpSession session) {
+	public String access(Model model, HttpSession session) {
 		Optional<Usuarios> optUsuario =usersSrv.BuscarPorId((UUID) session.getAttribute("user_session_id"));
 
 		if(optUsuario.isPresent() ){
 			session.setAttribute("user_session_id", optUsuario.get().getUsLlave());
+			session.setAttribute("user_name", optUsuario.get().getUsNombres()+" "+optUsuario.get().getUsApellidos());
+			model.addAttribute("usuario_ses", session.getAttribute("user_name"));
 			return "redirect:/inicio";
 		}else{
 			return "redirect:/login";

@@ -16,6 +16,7 @@ public class SecurityConfiguration {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http
+      .requiresChannel(channel -> channel.anyRequest().requiresSecure())
 			.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/css/**").permitAll()
                 .requestMatchers("/img/**").permitAll()
