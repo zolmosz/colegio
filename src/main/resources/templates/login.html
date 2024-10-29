@@ -32,32 +32,23 @@
 							<div class="col-lg-6 d-none d-lg-block bg-login-image">
 								<!-- Earnings (Monthly) Card Example -->
 								<div class="col-md-6 mb-4">
-<!--									<div class="card border-left-primary shadow h-100 py-2">-->
 										<div class="card-body">
 											<div class="row no-gutters align-items-center">
 												<div class="col mr-2">
-<!--													<div-->
-<!--														class="text-xs font-weight-bold text-primary text-uppercase mb-1">-->
-<!--														Earnings (Monthly)-->
-<!--													</div>-->
-<!--													<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>-->
 												</div>
 												<div class="col-auto">
 													<img th:src="@{/img/logo-colegio.jpg}" />
-<!--													<i class="fas fa-calendar fa-2x text-gray-300"></i>-->
 												</div>
 											</div>
-<!--										</div>-->
 									</div>
 								</div>
-<!--								<img th:src="@{/img/logo-colegio.jpg}" class="center" />-->
 							</div>
 							<div class="col-lg-6">
 								<div class="p-5">
 									<div class="text-center">
 										<h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
 									</div>
-									<form class="user" method="post" th:action="@{/logginprocess}">
+									<form class="user" method="post" th:action="@{/login}">
 										<div class="form-group">
 											<input type="text" name="username" class="form-control form-control-user"
 												id="username" aria-describedby="emailHelp"
@@ -76,21 +67,12 @@
 										</div>
 										<div><input type="submit" value="Login"
 												class="btn btn-google btn-user btn-block" /></div>
-										<!--										<a href="index.html" class="btn btn-primary btn-user btn-block">-->
-										<!--											Login-->
-										<!--										</a>-->
 										<hr>
 											<p>Resultado SHA-3 512:</p>
     										<pre id="result"></pre>
     										<pre id= "password"></pre>
 											<p style="font-size: 24px; color: cornflowerblue;" th:if="${param.logout}">Sesión de usuario finalizada</p>
 											<p style="font-size: 24px; color: red;" th:if="${param.error}">Usuario o contraseña errada</p>
-<!--										<a href="index.html" class="btn btn-google btn-user btn-block">-->
-<!--											<i class="fab fa-google fa-fw"></i> Login with Google-->
-<!--										</a>-->
-<!--										<a href="index.html" class="btn btn-facebook btn-user btn-block">-->
-<!--											<i class="fab fa-facebook-f fa-fw"></i> Login with Facebook-->
-<!--										</a>-->
 									</form>
 									<hr>
 									<div class="text-center">
@@ -111,16 +93,6 @@
 
 	</div>
 
-
-
-	<!--	        <form method="post" th:action="@{/logginprocess}">-->
-	<!--	           <div><p>Autenticación</p></div>-->
-	<!--	           <div><label>Usuario: </label><input type="text" name="username" /></div>-->
-	<!--	           <div><label>Password: </label><input type="password" name="password"/></div>-->
-	<!--	           <div><input type="submit" value="Entrar"/></div>-->
-	<!--	           <div><p></p></div>-->
-	<!--	        </form>-->
-
 	<!-- Bootstrap core JavaScript-->
 	<script src="/vendor/jquery/jquery.min.js"></script>
 	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -130,33 +102,6 @@
 
 	<!-- Custom scripts for all pages-->
 	<script src="/js/sb-admin-2.min.js"></script>
-<!-- 	<script> -->
-<!-- //         // Asigna la función al evento "input" -->
-<!-- //         document.getElementById('exampleInputPassword').addEventListener('input', convertToSHA3); -->
-
-<!-- //         async function convertToSHA3() { -->
-<!-- //             const inputString = document.getElementById('exampleInputPassword').value; -->
-
-<!-- //             if (inputString.trim() === "") { -->
-<!-- //                 document.getElementById('result').textContent = ""; // Limpiar si no hay texto -->
-<!-- //                 return; -->
-<!-- //             } -->
-
-<!-- //             const encoder = new TextEncoder(); -->
-<!-- //             const data = encoder.encode(inputString); -->
-
-<!-- //             // Usa el algoritmo de hash SHA-512 -->
-<!-- //             const hashBuffer = await crypto.subtle.digest('SHA-512', data); -->
-
-<!-- //             // Convierte el resultado a hexadecimal -->
-<!-- //             const hashArray = Array.from(new Uint8Array(hashBuffer)); -->
-<!-- //             const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); -->
-
-<!-- //             // Muestra el resultado en el HTML -->
-<!-- //             document.getElementById('result').textContent = hashHex; -->
-<!-- //             document.getElementById('password').textContent = hashHex; -->
-<!-- //         } -->
-<!--     </script> -->
 </body>
 
 </html>

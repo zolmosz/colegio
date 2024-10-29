@@ -1,6 +1,7 @@
 package com.uan.colegio.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.uan.colegio.commons.GenericService;
@@ -13,5 +14,6 @@ public interface UsuariosService extends GenericService<Usuarios, UUID>{
 	public UsuariosDto save(UsuariosDto userDto) ;
 	void delete(UsuariosDto userDto);
 	void deleteById(UUID id);
-	public UsuariosDto findByUsCodigo(String user);
+	public Optional<Usuarios> findByUsCodigo(String user);
+	public Optional<Usuarios> BuscarPorId(UUID id);
 }

@@ -1,19 +1,18 @@
 package com.uan.colegio.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import java.util.Optional;
+import java.util.UUID;
 
-import com.uan.colegio.dto.LoginRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.uan.colegio.entity.Usuarios;
 import com.uan.colegio.service.UsuariosService;
 import com.uan.colegio.utils.EncriptaSHA3;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
 
 @Controller
 public class InicioController {
@@ -24,44 +23,36 @@ public class InicioController {
 	@Autowired
 	EncriptaSHA3 encripta;
 	
-	@GetMapping("/")
+	@GetMapping("/inicio")
 	public String inicio() {
-//		return "inicio";
-		return "login";
-	}
-	
-	@PostMapping(value={"/logout"})
-	public String logout() {
-		return "/login";
-	}
-	
-	@GetMapping(value={"/login"})
-	public String login() {
-		return "/inicio";
-	}
-	
-	@PostMapping("/logginprocess")
-	public String inicio(@ModelAttribute LoginRequest loginRequest, HttpSession sesion, Model model) {
-		
-//		UsuariosDto usuarioDto = usersSrv.findByUsCodigo(loginRequest.getUsername());
-		
-		
-//		sesion.setAttribute("username", usuarioDto.getUsCodigo());
-//		sesion.setAttribute("fname", usuarioDto.getUsNombres());
-//		sesion.setAttribute("lname", usuarioDto.getUsApellidos());
-		
-//		model.addAttribute("titulo", "Bienvenido, Pagina de Inicio");
-//		model.addAttribute("usuario_ses", sesion.getAttribute("fname") +" " + sesion.getAttribute("lname"));
-		
-//		String usuario = encripta.getEncriptaSHA3_512(loginRequest.getPassword());
-		
-//		if (usuarioDto.getUsClave().equals(encripta.getEncriptaSHA3_512(loginRequest.getPassword()))) {
-//			return "inicio";
-//		}else {
-//			return "login";
-//		}
-		
 		return "inicio";
+	}
+	
+	@GetMapping(value={"/","/login"})
+	public String login() {		return "/login";
+	}
+	
+	@GetMapping("/access")
+	public String access(HttpSession session) {
+		Optional<Usuarios> optUsuario =usersSrv.BuscarPorId((UUID) session.getAttribute("user_session_id"));
+
+		if(optUsuario.isPresent() ){
+			session.setAttribute("user_session_id", optUsuario.get().getUsLlave());
+			return "redirect:/inicio";
+		}else{
+			return "redirect:/login";
+		}
 		
 	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		
+		if(session != null){
+			session.invalidate();
+		}
+		return "redirect:/login";
+	}
+	
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +34,8 @@ public class UsuariosController {
 	private ColegiosService colegiosrv;
 	@Autowired
 	private PerfilesService perfilsrv;
+	@Autowired
+	private BCryptPasswordEncoder passwordencoder;
 	
 	
 	@GetMapping("/")
@@ -67,6 +69,7 @@ public class UsuariosController {
 	@PostMapping("/salvar")
 	public String salvarUsuarios(@ModelAttribute UsuariosDto usuariosDto) {
 		
+		usuariosDto.setUsClave(passwordencoder.encode(usuariosDto.getUsClave()));
 		usuariosrv.save(usuariosDto);
 		
 		return "redirect:/views/usuarios/";
@@ -95,4 +98,5 @@ public class UsuariosController {
 		
 		return "redirect:/views/usuarios/";
 	}
+
 }

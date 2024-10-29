@@ -69,11 +69,10 @@ public class UsuariosServiceImpl extends GenericServiceImpl<Usuarios, UUID> impl
 	}
 
 	@Override
-	public UsuariosDto findByUsCodigo(String usuarioname) {
+	public Optional<Usuarios> findByUsCodigo(String usuarioname) {
 		Optional<Usuarios> usuario = this.usuariosDao.findByUsCodigo(usuarioname);
-		UsuariosDto usuarioDto = MHelpers.modelMapper().map(usuario.get(), UsuariosDto.class);
 
-		return usuarioDto;
+		return usuario;
 	}
 
 	@Override
@@ -84,6 +83,13 @@ public class UsuariosServiceImpl extends GenericServiceImpl<Usuarios, UUID> impl
 	@Override
 	public void deleteById(UUID id) {
 		usuariosDao.deleteById(id);
+	}
+
+	@Override
+	public Optional<Usuarios> BuscarPorId(UUID id) {
+		Optional<Usuarios> usuario = this.usuariosDao.findById(id);
+
+		return usuario;
 	}
 
 }
