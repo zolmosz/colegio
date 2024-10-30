@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.uan.colegio.commons.impl.GenericServiceImpl;
 import com.uan.colegio.dao.DirectivosDao;
+import com.uan.colegio.dto.CargosDto;
+import com.uan.colegio.dto.ColegiosDto;
 import com.uan.colegio.dto.DirectivosDto;
+import com.uan.colegio.dto.TiposIdentificacionDto;
 import com.uan.colegio.entity.Directivos;
 import com.uan.colegio.service.DirectivosService;
 import com.uan.colegio.utils.MHelpers;
@@ -32,6 +35,9 @@ public class DirectivosServiceImpl extends GenericServiceImpl<Directivos, UUID> 
 
 			DirectivosDto directivosDto = new DirectivosDto();
 			directivosDto = MHelpers.modelMapper().map(directivos, DirectivosDto.class);
+			directivosDto.setColegiosDto(MHelpers.modelMapper().map(directivos.getColegios(), ColegiosDto.class));
+			directivosDto.setTiposIdentificacionDto(MHelpers.modelMapper().map(directivos.getTiposIdentificacion(),TiposIdentificacionDto.class));
+			directivosDto.setCargosDto(MHelpers.modelMapper().map(directivos.getCargos(), CargosDto.class));
 			listadirectivosDto.add(directivosDto);
 		}
 
@@ -42,6 +48,9 @@ public class DirectivosServiceImpl extends GenericServiceImpl<Directivos, UUID> 
 	public DirectivosDto findByid(UUID id) {
 		Optional<Directivos> directivos = this.DirectivosDao.findById(id);
 		DirectivosDto directivosDto = MHelpers.modelMapper().map(directivos.get(), DirectivosDto.class);
+		directivosDto.setColegiosDto(MHelpers.modelMapper().map(directivos.get().getColegios(), ColegiosDto.class));
+		directivosDto.setTiposIdentificacionDto(MHelpers.modelMapper().map(directivos.get().getTiposIdentificacion(),TiposIdentificacionDto.class));
+		directivosDto.setCargosDto(MHelpers.modelMapper().map(directivos.get().getCargos(), CargosDto.class));
 
 		return directivosDto;
 	}

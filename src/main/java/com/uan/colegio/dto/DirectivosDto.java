@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @Data
 public class DirectivosDto {
 	private UUID diLlave;
-	private UUID diColegio;
+	private ColegiosDto colegiosDto;
 	private String diCodigo;
-	private UUID diTipoIdent;
+	private TiposIdentificacionDto tiposIdentificacionDto;
 	private String diIdentificacion;
-	private UUID diCargo;
+	private CargosDto cargosDto;
 	private Boolean diEstado;
 	private String diNombres;
 	private String diApellidos;
