@@ -66,15 +66,22 @@
                         </div>
                         <div class="form-group col-md-6">
                           <label for="usClave">Contraseña</label>
-                          <input 
+                          <div class="input-group ">
+                            <input 
                             type="password" 
                             class="form-control"
                             id="usClave"
-                                          placeholder="Constraseña ingreso Usuario"
-                                          th:field="*{usClave}"/>
-                <!-- <div class="input-group-addon">
-									<a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-								</div>-->
+                            placeholder="Constraseña ingreso Usuario"
+                            th:field="*{usClave}"/>
+                            <span class="input-group-append">
+                              <span class="input-group-text">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                              </span>
+                            </span>
+                            <!-- <div class="input-group-addon">
+                              <a href=""><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            </div> -->
+                          </div>
 						            </div>
                         <div class="form-group col-md-6">
                           <label for="usDescripcion">Descripci�n</label>
