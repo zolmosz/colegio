@@ -9,9 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.uan.colegio.dto.ColegiosDto;
-import com.uan.colegio.dto.EpsDto;
+import com.uan.colegio.dto.HorariosDto;
 import com.uan.colegio.service.ColegiosService;
-import com.uan.colegio.service.EpsService;
+import com.uan.colegio.service.HorariosService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,66 +21,66 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/views/eps")
-public class EpsController {
+@RequestMapping("/views/horarios")
+public class HorariosController {
 	
 
 	@Autowired
-	private EpsService epsrv;
+	private HorariosService horariosrv;
 	@Autowired
 	private ColegiosService colegiosrv;
 	
 	
 	@GetMapping("/")
-	public String listareps(Model model, HttpSession sesion) {
-		List<EpsDto> listaDtoEps = epsrv.findAll();
+	public String listarhorarios(Model model, HttpSession sesion) {
+		List<HorariosDto> listaDtoHorarios = horariosrv.findAll();
 		
 		
-		model.addAttribute("titulo","Lista de eps");
-		model.addAttribute("eps",listaDtoEps);
+		model.addAttribute("titulo","Lista de horarios");
+		model.addAttribute("horarios",listaDtoHorarios);
 		
-		return "views/eps/listar";
+		return "views/horarios/listar";
 	}
 	
 	@GetMapping("/create")
 	public String create(Model model, HttpSession sesion) {
 		
-		EpsDto epsDto = new EpsDto();
+		HorariosDto horariosDto = new HorariosDto();
 		List<ColegiosDto> listaDtoColegios = colegiosrv.findAll();
 		
 		model.addAttribute("titulo","Formulario nuevo Cargo");
-		model.addAttribute("eps", epsDto);
+		model.addAttribute("horario", horariosDto);
 		model.addAttribute("colegios", listaDtoColegios);
 		
-		return "views/eps/crear";
+		return "views/horarios/crear";
 	}
 	
 	@PostMapping("/salvar")
-	public String salvarEps(@ModelAttribute EpsDto epsDto) {
+	public String salvarHorarios(@ModelAttribute HorariosDto horariosDto) {
 		
-		epsrv.save(epsDto);
+		horariosrv.save(horariosDto);
 		
-		return "redirect:/views/eps/";
+		return "redirect:/views/horarios/";
 	}
 	
 	@GetMapping("/editar/{id}")
-	public String create(@PathVariable("id") UUID idEps,  Model model, HttpSession sesion) {
+	public String create(@PathVariable("id") UUID idHorarios,  Model model, HttpSession sesion) {
 		
-		EpsDto epsDto = epsrv.findByid(idEps);
+		HorariosDto horariosDto = horariosrv.findByid(idHorarios);
 		List<ColegiosDto> listaDtoColegios = colegiosrv.findAll();
 		
 		model.addAttribute("titulo","Formulario nuevo Cargo");
-		model.addAttribute("eps", epsDto);
+		model.addAttribute("horario", horariosDto);
 		model.addAttribute("colegios", listaDtoColegios);
 		
-		return "views/eps/crear";
+		return "views/horarios/crear";
 	}
 	
 	@GetMapping("/eliminar/{id}")
-	public String eliminar(@PathVariable("id") UUID idEps,  Model model, HttpSession sesion) {
+	public String eliminar(@PathVariable("id") UUID idHorarios,  Model model, HttpSession sesion) {
 		
-		epsrv.deleteById(idEps);
+		horariosrv.deleteById(idHorarios);
 		
-		return "redirect:/views/eps/";
+		return "redirect:/views/horarios/";
 	}
 }

@@ -3,7 +3,6 @@ package com.uan.colegio.dto;
 
 import java.util.UUID;
 
-import com.uan.colegio.entity.Cargos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

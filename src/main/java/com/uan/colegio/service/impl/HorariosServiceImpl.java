@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters.LocalDateConverter;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import com.uan.colegio.commons.impl.GenericServiceImpl;
 import com.uan.colegio.dao.HorariosDao;
+import com.uan.colegio.dto.ColegiosDto;
 import com.uan.colegio.dto.HorariosDto;
 import com.uan.colegio.entity.Horarios;
 import com.uan.colegio.service.HorariosService;
@@ -32,6 +36,7 @@ public class HorariosServiceImpl extends GenericServiceImpl<Horarios, UUID> impl
 
 			HorariosDto horariosDto = new HorariosDto();
 			horariosDto = MHelpers.modelMapper().map(horarios, HorariosDto.class);
+			horariosDto.setColegiosDto(MHelpers.modelMapper().map(horarios.getColegios(), ColegiosDto.class));
 			listahorariosDto.add(horariosDto);
 		}
 
@@ -42,12 +47,16 @@ public class HorariosServiceImpl extends GenericServiceImpl<Horarios, UUID> impl
 	public HorariosDto findByid(UUID id) {
 		Optional<Horarios> horarios = this.HorariosDao.findById(id);
 		HorariosDto horariosDto = MHelpers.modelMapper().map(horarios.get(), HorariosDto.class);
+		horariosDto.setColegiosDto(MHelpers.modelMapper().map(horarios.get().getColegios(), ColegiosDto.class));
 
 		return horariosDto;
 	}
 
 	@Override
 	public HorariosDto save(HorariosDto horariosDto) {
+
+		horariosDto.setHoHoraIni(LocalDateTime.ofInstant(horariosDto.getHoFechaIni().toInstant(), ZoneId.systemDefault() ));
+		horariosDto.setHoHoraFin(LocalDateTime.ofInstant(horariosDto.getHoFechaFin().toInstant(), ZoneId.systemDefault() ));
 		Horarios horarios = MHelpers.modelMapper().map(horariosDto, Horarios.class);
 
 		horarios = this.HorariosDao.save(horarios);

@@ -18,4 +18,28 @@ $(document).ready(function() {
         var modal = $(this);
         modal.find('#delRef').attr('href', '/views/'+opcion+'/eliminar/' + countryId);
     });
+
+  $('.datepicker').datepicker({
+    format: 'dd/mm/yyyy',  // Formato de fecha que deseas usar
+    autoclose: true,
+    todayHighlight: true,
+    orientation: "bottom auto"  // Para ajustar la posición del calendario
+  });
+
+  const timePicker = new tempusDominus.TempusDominus(document.getElementById('timepicker'), {
+    display: {
+      components: {
+        calendar: false, // Desactiva el calendario para que solo muestre la hora
+        clock: true,
+        hours: true,
+        minutes: true,
+        seconds: false  // Puedes activar los segundos si los necesitas
+      },
+      theme: 'bootstrap' // Usa el tema Bootstrap para combinar con SB-Admin 2
+    },
+    localization: {
+      format: 'HH:mm'  // Formato de hora
+    }
+  });
+
 });

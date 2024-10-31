@@ -8,6 +8,8 @@ import java.util.UUID;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,8 +23,10 @@ import lombok.NoArgsConstructor;
 public class Horarios {
 	@Id
     @GeneratedValue(generator = "uuid2")
-	private UUID hoiLlave;
-	private UUID hoColegio;
+	private UUID hoLlave;
+	@ManyToOne
+    @JoinColumn(name = "ho_colegio")
+	Colegios colegios;
 	private String hoCodigo;
 	private String hoDesc;
 	private Date hoFechaIni;

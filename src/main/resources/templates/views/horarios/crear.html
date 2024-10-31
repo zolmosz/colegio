@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
+    <!-- <meta charset="ISO-8859-1"> -->
+    <meta charset="UTF-8" />
+    <title></title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+    <link th:href="@{/vendor/bootstrap/css/bootstrap-datepicker.css}" rel="stylesheet" />
+    <!-- <link th:href="@{/vendor/bootstrap/css/tempus-dominus.min.css}" rel="stylesheet" /> -->
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <lu th:replace="layout/leftsidebar :: leftSide_bar"></lu>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <nav th:replace="layout/topnavbar :: top_navbar"></nav>
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid" layout:fragment="page-content">
+            <!-- 									/.container-fluid -->
+            <h1 th:text="${titulo}"></h1>
+
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="card shadow mb-4">
+                  <!-- Card Header - Dropdown -->
+                  <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                  >
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      Crear Horario
+                    </h6>
+                  </div>
+                  <div class="card-body">
+                    <form
+                      th:object="${horario}"
+                      th:action="@{/views/horarios/salvar}"
+                      method="post"
+                    >
+                      <div class="card-body">
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <input type="hidden" th:field="*{hoLlave}" />
+                            <label for="hoCodigo">Código</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="hoCodigo"
+                              placeholder="Código Horario"
+                              th:field="*{hoCodigo}"
+                            />
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="hoDesc">Descripción</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="hoDesc"
+                              placeholder="Descripción Horario"
+                              th:field="*{hoDesc}"
+                            />
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="hoFechaIni">Fecha Inicial</label>
+                            <div class="input-group date" >
+                            <input
+                              type="text"
+                              class="form-control datepicker"
+                              id="hoFechaIni"
+                              placeholder="Fecha Inicial"
+                              th:field="*{hoFechaIni}"
+                            />
+                            <span class="input-group-append">
+                              <span class="input-group-text">
+                                <i class="fa fa-calendar"></i>
+                              </span>
+                            </span>
+                          </div>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="hoFechaFin">Fecha Final</label>
+                            <div class="input-group date" >
+                            <input
+                              type="text"
+                              class="form-control datepicker"
+                              id="hoFechaFin"
+                              placeholder="Fecha Final"
+                              th:field="*{hoFechaFin}"
+                            />
+                            <span class="input-group-append">
+                              <span class="input-group-text">
+                                <i class="fa fa-calendar"></i>
+                              </span>
+                            </span>
+                            </div>
+                          </div>
+                          <!-- <div class="form-group col-md-6">
+                            <label for="hoHoraIni">Hora Inicial</label>
+                            <div class="input-group time" id="timepicker">
+                              <input type="text" class="form-control" id="hoHoraIni" placeholder="Selecciona la hora inicial" th:field="*{hoHoraIni}"/>
+                              <span class="input-group-append">
+                                <span class="input-group-text">
+                                  <i class="fa fa-clock"></i>
+                                </span>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="hoHoraIni">Hora Final</label>
+                            <div class="input-group time" id="timepicker">
+                              <input type="text" class="form-control" id="hoHoraFin" placeholder="Selecciona la hora final" th:field="*{hoHoraFin}"/>
+                              <span class="input-group-append">
+                                <span class="input-group-text">
+                                  <i class="fa fa-clock"></i>
+                                </span>
+                              </span>
+                            </div>
+                          </div> -->
+                          
+                          <div class="col-md-6 mb-4">
+                            <label for="hoColegio">Colegio</label>
+                            <select
+                              class="form-control"
+                              id="hoColegio"
+                              th:field="*{colegiosDto.coLlave}"
+                            >
+                              <option
+                                th:each="col:${colegios}"
+                                th:value="${col.coLlave}"
+                                th:text="${col.coNombre}"
+                              />
+                            </select>
+                          </div>
+                          <div class="form-check form-switch col-md-3 ml-4">                            
+                            <input class="form-check-input" type="checkbox" id="hoEstado" th:field="*{hoEstado}">
+                            <label for="hoEstado" class="form-check-label" >Activo</label>
+                          </div>
+                          <div class="form-check form-switch col-md-12 ml-4">                            
+                            <input class="form-check-input" type="checkbox" id="hoLunes" th:field="*{hoLunes}">
+                            <label for="hoLunes" class="form-check-label" >Lunes</label>
+                          </div>
+                          <div class="form-check form-switch col-md-12 ml-4">                            
+                            <input class="form-check-input" type="checkbox" id="hoMartes" th:field="*{hoMartes}">
+                            <label for="hoMartes" class="form-check-label" >Martes</label>
+                          </div>
+                          <div class="form-check form-switch col-md-12 ml-4">                            
+                            <input class="form-check-input" type="checkbox" id="hoMiercoles" th:field="*{hoMiercoles}">
+                            <label for="hoMiercoles" class="form-check-label" >Miercoles</label>
+                          </div>
+                          <div class="form-check form-switch col-md-12 ml-4">                            
+                            <input class="form-check-input" type="checkbox" id="hoJueves" th:field="*{hoJueves}">
+                            <label for="hoJueves" class="form-check-label" >Jueves</label>
+                          </div>
+                          <div class="form-check form-switch col-md-12 ml-4">                            
+                            <input class="form-check-input" type="checkbox" id="hoViernes" th:field="*{hoViernes}">
+                            <label for="hoViernes" class="form-check-label" >Viernes</label>
+                          </div>
+                          <div class="form-check form-switch col-md-12 ml-4">                            
+                            <input class="form-check-input" type="checkbox" id="hoSabado" th:field="*{hoSabado}">
+                            <label for="hoSabado" class="form-check-label" >Sábado</label>
+                          </div>
+                          <div class="form-check form-switch col-md-12 ml-4">                            
+                            <input class="form-check-input" type="checkbox" id="hoDomingo" th:field="*{hoDomingo}">
+                            <label for="hoDomingo" class="form-check-label" >Domingo</label>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                        <input
+                          type="submit"
+                          class="btn btn-primary"
+                          value="Guardar"
+                        />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End of Main Content -->
+          <footer th:replace="layout/footer :: _footer"></footer>
+        </div>
+      </div>
+    </div>
+    <!-- End of Content Wrapper -->
+
+    <a th:replace="layout/modallogout :: stopbot"></a>
+
+    <div th:replace="layout/modallogout :: modal_logout"></div>
+
+    <!-- 	Modal para crear usuario -->
+
+    <!-- Fin Modal -->
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+    <!-- Page level plugins -->
+    <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+
+    <!-- Page level custom scripts -->
+    <script th:src="@{/js/demo/chart-area-demo.js}"></script>
+    <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap-datepicker.min.js}"></script>
+    <!-- <script th:src="@{/vendor/bootstrap/js/moment.min.js}"></script> -->
+    <!-- <script th:src="@{/vendor/bootstrap/js/jquery.min.js}"></script> -->
+    <!-- <script th:src="@{/vendor/bootstrap/js/tempus-dominus.min.js}"></script> -->
+  </body>
+</html>

@@ -32,7 +32,7 @@ public class Usuarios {
     private String usEmail;
     @ManyToOne
     @JoinColumn(name = "us_perfil")
-    Perfiles perfiles;;
+    Perfiles perfiles;
     private String usClave;
     
 }

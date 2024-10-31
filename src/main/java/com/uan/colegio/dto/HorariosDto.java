@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class HorariosDto {
-	private UUID hoiLlave;
-	private UUID hoColegio;
+	private UUID hoLlave;
+	private ColegiosDto colegiosDto;
 	private String hoCodigo;
 	private String hoDesc;
 	private Date hoFechaIni;
