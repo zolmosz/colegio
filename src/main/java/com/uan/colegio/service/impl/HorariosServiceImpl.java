@@ -55,8 +55,8 @@ public class HorariosServiceImpl extends GenericServiceImpl<Horarios, UUID> impl
 	@Override
 	public HorariosDto save(HorariosDto horariosDto) {
 
-		horariosDto.setHoHoraIni(LocalDateTime.ofInstant(horariosDto.getHoFechaIni().toInstant(), ZoneId.systemDefault() ));
-		horariosDto.setHoHoraFin(LocalDateTime.ofInstant(horariosDto.getHoFechaFin().toInstant(), ZoneId.systemDefault() ));
+		// horariosDto.setHoHoraIni(LocalDateTime.ofInstant(horariosDto.getHoFechaIni().toInstant(), ZoneId.systemDefault() ));
+		// horariosDto.setHoHoraFin(LocalDateTime.ofInstant(horariosDto.getHoFechaFin().toInstant(), ZoneId.systemDefault() ));
 		Horarios horarios = MHelpers.modelMapper().map(horariosDto, Horarios.class);
 
 		horarios = this.HorariosDao.save(horarios);

@@ -48,7 +48,7 @@ public class HorariosController {
 		HorariosDto horariosDto = new HorariosDto();
 		List<ColegiosDto> listaDtoColegios = colegiosrv.findAll();
 		
-		model.addAttribute("titulo","Formulario nuevo Cargo");
+		model.addAttribute("titulo","Formulario nuevo horario");
 		model.addAttribute("horario", horariosDto);
 		model.addAttribute("colegios", listaDtoColegios);
 		
@@ -69,7 +69,7 @@ public class HorariosController {
 		HorariosDto horariosDto = horariosrv.findByid(idHorarios);
 		List<ColegiosDto> listaDtoColegios = colegiosrv.findAll();
 		
-		model.addAttribute("titulo","Formulario nuevo Cargo");
+		model.addAttribute("titulo","Formulario nuevo horario");
 		model.addAttribute("horario", horariosDto);
 		model.addAttribute("colegios", listaDtoColegios);
 		

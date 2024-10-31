@@ -1,7 +1,7 @@
 package com.uan.colegio.entity;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -31,8 +31,8 @@ public class Horarios {
 	private String hoDesc;
 	private Date hoFechaIni;
 	private Date hoFechaFin;
-	private LocalDateTime hoHoraIni;
-	private LocalDateTime hoHoraFin;
+	private LocalTime hoHoraIni;
+	private LocalTime hoHoraFin;
 	private Boolean hoLunes;
 	private Boolean hoMartes;
 	private Boolean hoMiercoles;

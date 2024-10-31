@@ -15,7 +15,14 @@
       type="text/css"
     />
     <link th:href="@{/css/css.css}" rel="stylesheet" />
-    <link th:href="@{/vendor/bootstrap/css/bootstrap-datepicker.css}" rel="stylesheet" />
+    <link
+      th:href="@{/vendor/bootstrap/css/bootstrap-datepicker.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/vendor/bootstrap/css/clockpicker.css}"
+      rel="stylesheet"
+    />
     <!-- <link th:href="@{/vendor/bootstrap/css/tempus-dominus.min.css}" rel="stylesheet" /> -->
 
     <!-- Custom styles for this template-->
@@ -79,36 +86,80 @@
                           </div>
                           <div class="form-group col-md-6">
                             <label for="hoFechaIni">Fecha Inicial</label>
-                            <div class="input-group date" >
-                            <input
-                              type="text"
-                              class="form-control datepicker"
-                              id="hoFechaIni"
-                              placeholder="Fecha Inicial"
-                              th:field="*{hoFechaIni}"
-                            />
-                            <span class="input-group-append">
-                              <span class="input-group-text">
-                                <i class="fa fa-calendar"></i>
+                            <div class="input-group date datepicker">
+                              <input
+                                type="text"
+                                class="form-control "
+                                id="hoFechaIni"
+                                placeholder="Fecha Inicial"
+                                th:field="*{hoFechaIni}"
+                              />
+                              <span class="input-group-append ">
+                                <span class="input-group-text ">
+                                  <i class="fa fa-calendar"></i>
+                                </span>
                               </span>
-                            </span>
+                            </div>
                           </div>
+                          <div class="form-group col-md-2">
+                            <label for="hoHoraIni">Hora Inicial</label>
+                            <div
+                              class="input-group clockpicker"
+                              data-placement="right"
+                              data-align="top"
+                              data-autoclose="true"
+                            >
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="hoHoraIni"
+                                value="00:00"
+                                th:field="*{hoHoraIni}"
+                              />
+                              <span class="input-group-append">
+                                <span class="input-group-text">
+                                  <i class="fa fa-clock"></i>
+                                </span>
+                              </span>
+                            </div>
                           </div>
                           <div class="form-group col-md-6">
                             <label for="hoFechaFin">Fecha Final</label>
-                            <div class="input-group date" >
-                            <input
-                              type="text"
-                              class="form-control datepicker"
-                              id="hoFechaFin"
-                              placeholder="Fecha Final"
-                              th:field="*{hoFechaFin}"
-                            />
-                            <span class="input-group-append">
-                              <span class="input-group-text">
-                                <i class="fa fa-calendar"></i>
+                            <div class="input-group date">
+                              <input
+                                type="text"
+                                class="form-control datepicker"
+                                id="hoFechaFin"
+                                placeholder="Fecha Final"
+                                th:field="*{hoFechaFin}"
+                              />
+                              <span class="input-group-append">
+                                <span class="input-group-text">
+                                  <i class="fa fa-calendar"></i>
+                                </span>
                               </span>
-                            </span>
+                            </div>
+                          </div>
+                          <div class="form-group col-md-2">
+                            <label for="hoHoraFin">Hora Final</label>
+                            <div
+                              class="input-group clockpicker"
+                              data-placement="right"
+                              data-align="top"
+                              data-autoclose="true"
+                            >
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="hoHoraFin"
+                                value="23:00"
+                                th:field="*{hoHoraFin}"
+                              />
+                              <span class="input-group-append">
+                                <span class="input-group-text">
+                                  <i class="fa fa-clock"></i>
+                                </span>
+                              </span>
                             </div>
                           </div>
                           <!-- <div class="form-group col-md-6">
@@ -133,7 +184,7 @@
                               </span>
                             </div>
                           </div> -->
-                          
+
                           <div class="col-md-6 mb-4">
                             <label for="hoColegio">Colegio</label>
                             <select
@@ -148,39 +199,94 @@
                               />
                             </select>
                           </div>
-                          <div class="form-check form-switch col-md-3 ml-4">                            
-                            <input class="form-check-input" type="checkbox" id="hoEstado" th:field="*{hoEstado}">
-                            <label for="hoEstado" class="form-check-label" >Activo</label>
+                          <div class="form-check form-switch col-md-3 ml-4">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="hoEstado"
+                              th:field="*{hoEstado}"
+                            />
+                            <label for="hoEstado" class="form-check-label"
+                              >Activo</label
+                            >
                           </div>
-                          <div class="form-check form-switch col-md-12 ml-4">                            
-                            <input class="form-check-input" type="checkbox" id="hoLunes" th:field="*{hoLunes}">
-                            <label for="hoLunes" class="form-check-label" >Lunes</label>
+                          <div class="form-check form-switch col-md-12 ml-4">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="hoLunes"
+                              th:field="*{hoLunes}"
+                            />
+                            <label for="hoLunes" class="form-check-label"
+                              >Lunes</label
+                            >
                           </div>
-                          <div class="form-check form-switch col-md-12 ml-4">                            
-                            <input class="form-check-input" type="checkbox" id="hoMartes" th:field="*{hoMartes}">
-                            <label for="hoMartes" class="form-check-label" >Martes</label>
+                          <div class="form-check form-switch col-md-12 ml-4">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="hoMartes"
+                              th:field="*{hoMartes}"
+                            />
+                            <label for="hoMartes" class="form-check-label"
+                              >Martes</label
+                            >
                           </div>
-                          <div class="form-check form-switch col-md-12 ml-4">                            
-                            <input class="form-check-input" type="checkbox" id="hoMiercoles" th:field="*{hoMiercoles}">
-                            <label for="hoMiercoles" class="form-check-label" >Miercoles</label>
+                          <div class="form-check form-switch col-md-12 ml-4">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="hoMiercoles"
+                              th:field="*{hoMiercoles}"
+                            />
+                            <label for="hoMiercoles" class="form-check-label"
+                              >Miercoles</label
+                            >
                           </div>
-                          <div class="form-check form-switch col-md-12 ml-4">                            
-                            <input class="form-check-input" type="checkbox" id="hoJueves" th:field="*{hoJueves}">
-                            <label for="hoJueves" class="form-check-label" >Jueves</label>
+                          <div class="form-check form-switch col-md-12 ml-4">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="hoJueves"
+                              th:field="*{hoJueves}"
+                            />
+                            <label for="hoJueves" class="form-check-label"
+                              >Jueves</label
+                            >
                           </div>
-                          <div class="form-check form-switch col-md-12 ml-4">                            
-                            <input class="form-check-input" type="checkbox" id="hoViernes" th:field="*{hoViernes}">
-                            <label for="hoViernes" class="form-check-label" >Viernes</label>
+                          <div class="form-check form-switch col-md-12 ml-4">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="hoViernes"
+                              th:field="*{hoViernes}"
+                            />
+                            <label for="hoViernes" class="form-check-label"
+                              >Viernes</label
+                            >
                           </div>
-                          <div class="form-check form-switch col-md-12 ml-4">                            
-                            <input class="form-check-input" type="checkbox" id="hoSabado" th:field="*{hoSabado}">
-                            <label for="hoSabado" class="form-check-label" >Sábado</label>
+                          <div class="form-check form-switch col-md-12 ml-4">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="hoSabado"
+                              th:field="*{hoSabado}"
+                            />
+                            <label for="hoSabado" class="form-check-label"
+                              >Sábado</label
+                            >
                           </div>
-                          <div class="form-check form-switch col-md-12 ml-4">                            
-                            <input class="form-check-input" type="checkbox" id="hoDomingo" th:field="*{hoDomingo}">
-                            <label for="hoDomingo" class="form-check-label" >Domingo</label>
+                          <div class="form-check form-switch col-md-12 ml-4">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="hoDomingo"
+                              th:field="*{hoDomingo}"
+                            />
+                            <label for="hoDomingo" class="form-check-label"
+                              >Domingo</label
+                            >
                           </div>
-
                         </div>
                       </div>
                       <div class="card-footer">
@@ -228,9 +334,17 @@
     <!-- Page level custom scripts -->
     <script th:src="@{/js/demo/chart-area-demo.js}"></script>
     <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
-    <script th:src="@{/vendor/bootstrap/js/bootstrap-datepicker.min.js}"></script>
+    <script
+      th:src="@{/vendor/bootstrap/js/bootstrap-datepicker.min.js}"
+    ></script>
+    <script
+      th:src="@{/vendor/bootstrap/js/clockpicker.js}"
+    ></script>
     <!-- <script th:src="@{/vendor/bootstrap/js/moment.min.js}"></script> -->
     <!-- <script th:src="@{/vendor/bootstrap/js/jquery.min.js}"></script> -->
     <!-- <script th:src="@{/vendor/bootstrap/js/tempus-dominus.min.js}"></script> -->
+    <script type="text/javascript">
+      $(".clockpicker").clockpicker();
+    </script>
   </body>
 </html>
