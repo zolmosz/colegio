@@ -8,21 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.uan.colegio.dto.BarriosDto;
 import com.uan.colegio.dto.CargosDto;
-import com.uan.colegio.dto.CiudadesDto;
 import com.uan.colegio.dto.ColegiosDto;
-import com.uan.colegio.dto.ProfesionesDto;
-import com.uan.colegio.dto.DirectivoDto;
 import com.uan.colegio.dto.DirectivosDto;
 import com.uan.colegio.dto.TiposIdentificacionDto;
-import com.uan.colegio.service.BarriosService;
 import com.uan.colegio.service.CargosService;
-import com.uan.colegio.service.CiudadesService;
 import com.uan.colegio.service.ColegiosService;
 import com.uan.colegio.service.DirectivosService;
-import com.uan.colegio.service.ProfesionesService;
-import com.uan.colegio.service.DirectivoService;
 import com.uan.colegio.service.TiposIdentificacionService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -94,7 +86,6 @@ public class DirectivosController {
 		model.addAttribute("colegios",listaColegiosDto);
 		model.addAttribute("tipident", listaTipoIdentDto);
 		model.addAttribute("cargos", listaCargosDtos);
-		model.addAttribute("usuario_ses", sesion.getAttribute("fname") +" " + sesion.getAttribute("lname"));
 		
 		return "views/directivo/crear";
 	}

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class GradosDto {
 	private UUID grLlave;
-	private UUID grColegio;
+	private ColegiosDto colegiosDto;
 	private String grCodigo;
 	private String grDesc;
 	private Boolean grEstado;

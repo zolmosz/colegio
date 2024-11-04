@@ -14,23 +14,23 @@ import lombok.NoArgsConstructor;
 @Data
 public class AlumnosBasicosDto {
 	private UUID abLlave;
-	private UUID abColegio;
+	private ColegiosDto colegiosDto;
 	private String abCodigo;
 	private String abNombres;
 	private String abApellidos;
 	private Date abFechaNac;
 	private BigInteger abEdad;
 	private String abGrupoRh;
-	private UUID abEps;
+	private EpsDto epsDto;
 	private String abAlergias;
-	private UUID ab_tipo_ident;
+	private TiposIdentificacionDto tiposIdentificacionDto;
 	private String abIdentidad;
 	private String abDireccionRes;
 	private String abTelefonoRes;
-	private UUID abHorarioEscolar;
+	private HorariosDto horariosDto;
 	private Date abFechaIngreso;
 	private String abFoto;
-	private UUID abNivelIngreso;
+	private GradosDto gradosDto;
 	private String abEstado;
 	private byte[] abFotoImg;
 }

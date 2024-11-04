@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.uan.colegio.commons.impl.GenericServiceImpl;
 import com.uan.colegio.dao.GradosDao;
+import com.uan.colegio.dto.ColegiosDto;
 import com.uan.colegio.dto.GradosDto;
 import com.uan.colegio.entity.Grados;
 import com.uan.colegio.service.GradosService;
@@ -32,6 +33,7 @@ public class GradosServiceImpl extends GenericServiceImpl<Grados, UUID> implemen
 
 			GradosDto gradosDto = new GradosDto();
 			gradosDto = MHelpers.modelMapper().map(grados, GradosDto.class);
+			gradosDto.setColegiosDto(MHelpers.modelMapper().map(grados.getColegios(), ColegiosDto.class));
 			listagradosDto.add(gradosDto);
 		}
 
@@ -42,6 +44,7 @@ public class GradosServiceImpl extends GenericServiceImpl<Grados, UUID> implemen
 	public GradosDto findByid(UUID id) {
 		Optional<Grados> grados = this.GradosDao.findById(id);
 		GradosDto gradosDto = MHelpers.modelMapper().map(grados.get(), GradosDto.class);
+		gradosDto.setColegiosDto(MHelpers.modelMapper().map(grados.get().getColegios(), ColegiosDto.class));
 
 		return gradosDto;
 	}

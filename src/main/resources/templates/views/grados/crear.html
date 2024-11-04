@@ -43,70 +43,55 @@
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
                   >
                     <h6 class="m-0 font-weight-bold text-primary">
-                      Crear EPS
+                      Crear Grado
                     </h6>
                   </div>
                   <div class="card-body">
                     <form
-                      th:object="${eps}"
-                      th:action="@{/views/eps/salvar}"
+                      th:object="${grado}"
+                      th:action="@{/views/grados/salvar}"
                       method="post"
                     >
-                      <div class="card-body">
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <input type="hidden" th:field="*{epsLlave}" />
-                            <label for="epsNit">Nit</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="epsNit"
-                              placeholder="Número de Identificación Tributaria"
-                              th:field="*{epsNit}"
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <input type="hidden" th:field="*{grLlave}" />
+                          <label for="grCodigo">Código Directivo</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="grCodigo"
+                            placeholder="Código Grado"
+                            th:field="*{grCodigo}"
+                          />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="grDesc">Descripción</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="grDesc"
+                            placeholder="Descripción Grado"
+                            th:field="*{grDesc}"
+                          />
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <label for="grColegio">Colegio</label>
+                          <select class="form-control" id="grColegio" th:field="*{ColegiosDto.coLlave}" >
+                            <option
+                              th:each="col:${colegios}"
+                              th:value="${col.coLlave}"
+                              th:text="${col.coNombre}"
                             />
-                          </div>
-                          <div class="form-group col-md-6">
-                            <label for="epsDigitoVer">Digito de Verificación</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="epsDigitoVer"
-                              placeholder="Digito de Verificación"
-                              th:field="*{epsDigitoVer}"
-                            />
-                          </div>
-                          <div class="form-group col-md-6">
-                            <label for="epsNombre">Nombre</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="epsNombre"
-                              placeholder="Nombre de la EPS"
-                              th:field="*{epsNombre}"
-                            />
-                          </div>
-                          
-                          <div class="col-md-6 mb-4">
-                            <label for="epsColegio">Colegio</label>
-                            <select
-                              class="form-control"
-                              id="epsColegio"
-                              th:field="*{epsColegio}"
-                            >
-                              <option
-                                th:each="col:${colegios}"
-                                th:value="${col.coLlave}"
-                                th:text="${col.coNombre}"
-                              />
-                            </select>
-                          </div>
-                          <div class="form-check form-switch col-md-3">                            
-                            <input class="form-check-input" type="checkbox" id="epsEstado" th:field="*{epsEstado}">
-                            <label for="epsEstado" class="form-check-label" > Activo</label>
-                          </div>
+                          </select>
+                        </div>
+                        <div class="form-check form-switch col-md-3">                            
+                          <input class="form-check-input" type="checkbox" id="grEstado" th:field="*{grEstado}">
+                          <label for="grEstado" class="form-check-label" > Activo</label>
                         </div>
                       </div>
-                      <div class="card-footer">
+                      <div
+                        class="card-footer col-sm-12 col-md-12 col-lg-12 mb-3 mb-sm-0"
+                      >
                         <input
                           type="submit"
                           class="btn btn-primary"

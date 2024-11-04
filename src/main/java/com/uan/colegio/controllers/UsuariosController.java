@@ -45,7 +45,6 @@ public class UsuariosController {
 		
 		model.addAttribute("titulo","Lista de usuarios");
 		model.addAttribute("usuarios",listaDtoUsuarios);
-		model.addAttribute("usuario_ses", sesion.getAttribute("fname") +" " + sesion.getAttribute("lname"));
 		
 		return "views/usuarios/listar";
 	}
@@ -61,7 +60,6 @@ public class UsuariosController {
 		model.addAttribute("usuario", usuariosDto);
 		model.addAttribute("colegios",listaColegiosDto);
 		model.addAttribute("perfiles", listaPerfilesDtos);
-		model.addAttribute("usuario_ses", sesion.getAttribute("fname") +" " + sesion.getAttribute("lname"));
 		
 		return "views/usuarios/crear";
 	}

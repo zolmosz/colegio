@@ -8,12 +8,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.uan.colegio.dto.CiudadesDto;
-import com.uan.colegio.dto.PaisesDto;
-import com.uan.colegio.dto.DepartamentosDto;
-import com.uan.colegio.service.CiudadesService;
-import com.uan.colegio.service.DepartamentosService;
-import com.uan.colegio.service.PaisesService;
+import com.uan.colegio.dto.AlumnosBasicosDto;
+import com.uan.colegio.dto.ColegiosDto;
+import com.uan.colegio.dto.TiposIdentificacionDto;
+import com.uan.colegio.dto.EpsDto;
+import com.uan.colegio.dto.GradosDto;
+import com.uan.colegio.dto.HorariosDto;
+import com.uan.colegio.service.AlumnosBasicosService;
+import com.uan.colegio.service.ColegiosService;
+import com.uan.colegio.service.EpsService;
+import com.uan.colegio.service.GradosService;
+import com.uan.colegio.service.HorariosService;
+import com.uan.colegio.service.TiposIdentificacionService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,69 +34,84 @@ public class AlumnosBasicosController {
 	
 
 	@Autowired
-	private PaisesService paissrv;
+	private ColegiosService colegiossrv;
 	@Autowired
-	private DepartamentosService departamentossrv;
+	private EpsService epssrv;
 	@Autowired
-	private CiudadesService ciudadesrv;
+	private TiposIdentificacionService tiposIdentificacionsrv;
+	@Autowired
+	private HorariosService horariossrv;
+	@Autowired
+	private GradosService gradossrv;
+	@Autowired
+	private AlumnosBasicosService alumnosBasicossrv;
 	
 	
 	@GetMapping("/")
-	public String listarCiudades(Model model, HttpSession sesion) {
-		List<CiudadesDto> listaDtoCiudades = ciudadesrv.findAll();
+	public String listarAlumnosBasicos(Model model, HttpSession sesion) {
+		List<AlumnosBasicosDto> listaDtoAlumnosBasicos = alumnosBasicossrv.findAll();
 		
-		model.addAttribute("titulo","Lista de Ciudades");
-		model.addAttribute("ciudades",listaDtoCiudades);
-		model.addAttribute("usuario_ses", sesion.getAttribute("fname") +" " + sesion.getAttribute("lname"));
+		model.addAttribute("titulo","Lista de Alumnos");
+		model.addAttribute("alumnos",listaDtoAlumnosBasicos);
 		
-		return "views/ciudades/listar";
+		return "views/alumnosbas/listar";
 	}
 	
 	@GetMapping("/create")
 	public String create(Model model, HttpSession sesion) {
 		
-		CiudadesDto CiudadesDto = new CiudadesDto();
-		List<PaisesDto> listaDtoPaises = paissrv.findAll();
-		List<DepartamentosDto> listaDtoDepartamentos = departamentossrv.findAll();
+		AlumnosBasicosDto alumnosBasicosDto = new AlumnosBasicosDto();
+		List<ColegiosDto> listaDtoColegios = colegiossrv.findAll();
+		List<EpsDto> listaDtoEps = epssrv.findAll();
+		List<TiposIdentificacionDto> listaDtoTiposIdentificacion = tiposIdentificacionsrv.findAll();
+		List<HorariosDto> listaHorariosDtos = horariossrv.findAll();
+		List<GradosDto> listaGradosDtos = gradossrv.findAll();
 		
-		model.addAttribute("titulo","Formulario nuevo departamento");
-		model.addAttribute("ciudad", CiudadesDto);
-		model.addAttribute("paises", listaDtoPaises);
-		model.addAttribute("departamentos", listaDtoDepartamentos);
-		model.addAttribute("usuario_ses", sesion.getAttribute("fname") +" " + sesion.getAttribute("lname"));
+		model.addAttribute("titulo","Formulario nuevo Alumno");
+		model.addAttribute("alumnobas", alumnosBasicosDto);
+		model.addAttribute("colegios", listaDtoColegios);
+		model.addAttribute("eps", listaDtoEps);
+		model.addAttribute("tipident", listaDtoTiposIdentificacion);
+		model.addAttribute("horarios", listaHorariosDtos);
+		model.addAttribute("grados", listaGradosDtos);
 		
-		return "views/ciudades/crear";
+		return "views/alumnosbas/crear";
 	}
 	
 	@PostMapping("/salvar")
-	public String salvarCiudades(@ModelAttribute CiudadesDto CiudadesDto) {
+	public String salvarCiudades(@ModelAttribute AlumnosBasicosDto alumnosBasicosDto) {
 		
-		ciudadesrv.save(CiudadesDto);
+		alumnosBasicossrv.save(alumnosBasicosDto);
 		
-		return "redirect:/views/ciudades/";
+		return "redirect:/views/alumnosbas/";
 	}
 	
 	@GetMapping("/editar/{id}")
-	public String create(@PathVariable("id") UUID idciudad,  Model model, HttpSession sesion) {
+	public String create(@PathVariable("id") UUID idAlumno,  Model model, HttpSession sesion) {
 		
-		CiudadesDto ciudadesDto = ciudadesrv.findByid(idciudad);
-		List<PaisesDto> listaDtoPaises = paissrv.findAll();
-		List<DepartamentosDto> listaDtoDepartamentos = departamentossrv.findAll();
+		AlumnosBasicosDto alumnosBasicosDto = alumnosBasicossrv.findByid(idAlumno);
+		List<ColegiosDto> listaDtoColegios = colegiossrv.findAll();
+		List<EpsDto> listaDtoEps = epssrv.findAll();
+		List<TiposIdentificacionDto> listaDtoTiposIdentificacion = tiposIdentificacionsrv.findAll();
+		List<HorariosDto> listaHorariosDtos = horariossrv.findAll();
+		List<GradosDto> listaGradosDtos = gradossrv.findAll();
 		
 		model.addAttribute("titulo","Formulario nuevo departamento");
-		model.addAttribute("ciudad", ciudadesDto);
-		model.addAttribute("paises", listaDtoPaises);
-		model.addAttribute("departamentos", listaDtoDepartamentos);
-		model.addAttribute("usuario_ses", sesion.getAttribute("fname") +" " + sesion.getAttribute("lname"));
+		model.addAttribute("alumnobas", alumnosBasicosDto);
+		model.addAttribute("colegios", listaDtoColegios);
+		model.addAttribute("eps", listaDtoEps);
+		model.addAttribute("tipoident", listaDtoTiposIdentificacion);
+		model.addAttribute("horarios", listaHorariosDtos);
+		model.addAttribute("grados", listaGradosDtos);
 		
-		return "views/ciudades/crear";
+		return "views/alumnosbas/crear";
 	}
 	
 	@GetMapping("/eliminar/{id}")
-	public String eliminar(@PathVariable("id") UUID idciudad,  Model model, HttpSession sesion) {
+	public String eliminar(@PathVariable("id") UUID idAlumno,  Model model, HttpSession sesion) {
 		
-		ciudadesrv.deleteById(idciudad);
+		alumnosBasicossrv.deleteById(idAlumno);
 		
-		return "redirect:/views/ciudades/";
+		return "redirect:/views/alumnosbas/";
 	}
 }
