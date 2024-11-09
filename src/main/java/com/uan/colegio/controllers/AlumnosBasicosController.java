@@ -1,12 +1,20 @@
 package com.uan.colegio.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.uan.colegio.dto.AlumnosBasicosDto;
 import com.uan.colegio.dto.ColegiosDto;
@@ -31,7 +39,6 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/views/alumnosbas")
 public class AlumnosBasicosController {
-	
 
 	@Autowired
 	private ColegiosService colegiossrv;
@@ -66,8 +73,8 @@ public class AlumnosBasicosController {
 		List<TiposIdentificacionDto> listaDtoTiposIdentificacion = tiposIdentificacionsrv.findAll();
 		List<HorariosDto> listaHorariosDtos = horariossrv.findAll();
 		List<GradosDto> listaGradosDtos = gradossrv.findAll();
-		
-		model.addAttribute("titulo","Formulario nuevo Alumno");
+
+		model.addAttribute("titulo","Formulario nuevo alumno");
 		model.addAttribute("alumnobas", alumnosBasicosDto);
 		model.addAttribute("colegios", listaDtoColegios);
 		model.addAttribute("eps", listaDtoEps);
@@ -78,9 +85,31 @@ public class AlumnosBasicosController {
 		return "views/alumnosbas/crear";
 	}
 	
-	@PostMapping("/salvar")
-	public String salvarCiudades(@ModelAttribute AlumnosBasicosDto alumnosBasicosDto) {
+	@PostMapping("/cargararch")
+	public String cargarArchivo(@RequestParam("file") MultipartFile imagen){
+
 		
+		return null;
+	}
+
+	@PostMapping("/salvar")
+	public String salvarAlumnos(@ModelAttribute AlumnosBasicosDto alumnosBasicosDto, @RequestParam(value="foto", required = false) MultipartFile imagen) throws IOException {
+	// public String salvarAlumnos(@ModelAttribute AlumnosBasicosDto alumnosBasicosDto) throws IOException {
+		
+		if (!imagen.isEmpty() && imagen != null) {
+			Path directorioImagenes = Paths.get("src/main/resources/static/img/");
+			String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+
+			Path rutaCompleta = Paths.get(rutaAbsoluta+"/"+imagen.getOriginalFilename());
+			Files.write(rutaCompleta, imagen.getBytes());
+
+			//undraw_profile.svg
+			alumnosBasicosDto.setAbFotoImg(imagen.getBytes());
+		}else{
+			byte[] fotoActual = alumnosBasicossrv.getFotoActual(alumnosBasicosDto.getAbLlave());
+			alumnosBasicosDto.setAbFotoImg(fotoActual);
+		}
+			
 		alumnosBasicossrv.save(alumnosBasicosDto);
 		
 		return "redirect:/views/alumnosbas/";
@@ -96,11 +125,18 @@ public class AlumnosBasicosController {
 		List<HorariosDto> listaHorariosDtos = horariossrv.findAll();
 		List<GradosDto> listaGradosDtos = gradossrv.findAll();
 		
-		model.addAttribute("titulo","Formulario nuevo departamento");
+		var imagen = alumnosBasicosDto.getAbFotoImg();
+		if (imagen != null)  {
+			// byte[] imageBytes = ... // Recupera la imagen
+			String base64Image = "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(alumnosBasicosDto.getAbFotoImg());
+			model.addAttribute("base64Image", base64Image);
+		}
+
+		model.addAttribute("titulo","Formulario nuevo alumno");
 		model.addAttribute("alumnobas", alumnosBasicosDto);
 		model.addAttribute("colegios", listaDtoColegios);
 		model.addAttribute("eps", listaDtoEps);
-		model.addAttribute("tipoident", listaDtoTiposIdentificacion);
+		model.addAttribute("tipident", listaDtoTiposIdentificacion);
 		model.addAttribute("horarios", listaHorariosDtos);
 		model.addAttribute("grados", listaGradosDtos);
 		

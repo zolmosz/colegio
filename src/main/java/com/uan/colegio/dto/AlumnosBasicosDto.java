@@ -5,6 +5,8 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.UUID;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +20,7 @@ public class AlumnosBasicosDto {
 	private String abCodigo;
 	private String abNombres;
 	private String abApellidos;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date abFechaNac;
 	private BigInteger abEdad;
 	private String abGrupoRh;
@@ -28,6 +31,7 @@ public class AlumnosBasicosDto {
 	private String abDireccionRes;
 	private String abTelefonoRes;
 	private HorariosDto horariosDto;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date abFechaIngreso;
 	private String abFoto;
 	private GradosDto gradosDto;

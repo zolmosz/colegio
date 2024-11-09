@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
+    <!-- <meta charset="ISO-8859-1"> -->
+    <meta charset="UTF-8" />
+    <title></title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+    <link
+      th:href="@{/vendor/bootstrap/css/bootstrap-datepicker.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/vendor/bootstrap/css/clockpicker.css}"
+      rel="stylesheet"
+    />
+    <!-- <link th:href="@{/vendor/bootstrap/css/tempus-dominus.min.css}" rel="stylesheet" /> -->
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <lu th:replace="layout/leftsidebar :: leftSide_bar"></lu>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <nav th:replace="layout/topnavbar :: top_navbar"></nav>
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid" layout:fragment="page-content">
+            <!-- 									/.container-fluid -->
+            <h1 th:text="${titulo}"></h1>
+            <div class="row">
+              <div class="col-xl-4">
+                <!-- Profile picture card-->
+                <div class="card mb-4 mb-xl-0">
+                    <form th:action="@{/views/alumnosbas/cargararch}" th:object="${alumnobas}" method="post" enctype="multipart/form-data">
+                        <div class="card-header">Foto de Alumno</div>
+                        <div class="card-body text-center">
+                            <!-- Profile picture image-->
+                            <img class="img-account-profile rounded-circle mb-2 img-fluid" th:src="${base64Image}" alt="" />
+                            <!-- Profile picture help block-->
+                            <div class="small font-italic text-muted mb-4">JPG ó PNG ó No mayor a 5 MB</div>
+                            <!-- Profile picture upload button-->
+                            <div class="card-footer">
+                              <input
+                                type="submit"
+                                class="btn btn-primary"
+                                value="Cargar nueva imagen"
+                              />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <div class="card mb-4">
+                  <div class="card-header">Información Alumno</div>
+                  <!-- Card Header - Dropdown -->
+                  <div class="card-body">
+                    <form
+                      th:object="${alumnobas}"
+                      th:action="@{/views/alumnosbas/salvar}"
+                      method="post"
+                      enctype="multipart/form-data"
+                    >
+                      <div class="card-body">
+                          <!-- Form Group (username)-->
+                          <div class="mb-3">
+                            <input type="hidden" th:field="*{abLlave}" />
+                            <label class="small mb-1" for="abCodigo">Código Alumno</label>
+                            <input class="form-control" id="abCodigo" type="text" placeholder="Código de Alumno" th:field="*{abCodigo}"/>
+                          </div>
+                          <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                              <label class="small mb-1" for="abColegio">Colegio</label>
+                              <select class="form-control" id="abColegio" th:field="*{colegiosDto.coLlave}" >
+                                <option
+                                  th:each="col:${colegios}"
+                                  th:value="${col.coLlave}"
+                                  th:text="${col.coNombre}"
+                                />
+                              </select>
+                            </div>
+                            <div class="col-md-6">
+                              <label class="small mb-1" for="foto">Foto Alumno</label>
+                              <input class="form-control" id="foto" name="foto" type="file" ></input>
+                            </div>
+                          </div>
+                          <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="abNombres">Nombres</label>
+                                <input class="form-control" id="abNombres" type="text" placeholder="Nombres de Alumno" th:field="*{abNombres}" />
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="abApellidos">Apellidos</label>
+                                <input class="form-control" id="abApellidos" type="text" placeholder="Apellidos de Alumno" th:field="*{abApellidos}" />
+                            </div>
+                          </div>
+                          <!-- Form Row        -->
+                          <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                  <label class="small mb-1" for="abFechaNac">Fecha Nacimiento</label>
+                                  <div class="input-group ">
+                                    <input
+                                      type="date"
+                                      class="form-control "
+                                      lang="en"
+                                      id="abFechaNac"
+                                      placeholder="Fecha Nacimiento"
+                                      th:field="*{abFechaNac}"
+                                    />
+                                  </div>
+                            </div>
+                            <div class="col-md-6">
+                              <label class="small mb-1" for="abEdad">Edad</label>
+                              <input class="form-control" id="abEdad" type="text" placeholder="Edad de Alumno" th:field="*{abEdad}" />
+                            </div>
+                          </div>
+                          <!-- Form Row        -->
+                          <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                              <label class="small mb-1" for="abEps">EPS</label>
+                              <select class="form-control" id="abEps" th:field="*{epsDto.epsLlave}" >
+                                <option
+                                  th:each="eps:${eps}"
+                                  th:value="${eps.epsLlave}"
+                                  th:text="${eps.epsNombre}"
+                                />
+                              </select>
+                            </div>
+                            <div class="col-md-6">
+                              <label class="small mb-1" for="abGrupoRh">Grupo RH</label>
+                              <input class="form-control" id="abGrupoRh" type="text" placeholder="RH de Alumno" th:field="*{abGrupoRh}" />
+                            </div>
+                          </div>
+                          <!-- Form Row        -->
+                          <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                              <label class="small mb-1" for="abFechaIngreso">Fecha Ingreso</label>
+                              <div class="input-group ">
+                                <input
+                                  type="date"
+                                  class="form-control "
+                                  lang="en"
+                                  id="abFechaIngreso"
+                                  placeholder="Fecha Ingreso"
+                                  th:field="*{abFechaIngreso}"
+                                />
+                              </div>
+                              </div>
+                              <div class="col-md-6">
+                                <label class="small mb-1" for="abAlergias">Alergias</label>
+                                <input class="form-control" id="abAlergias" type="text" placeholder="Alergias Alumno" th:field="*{abAlergias}" />
+                              </div>
+                          </div>
+                          <!-- Form Row        -->
+                          <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                              <label class="small mb-1" for="abTipoIdent">Tipo Identidad</label>
+                              <select class="form-control" id="abTipoIdent" th:field="*{tiposIdentificacionDto.tiLlave}" >
+                                <option
+                                  th:each="ti:${tipident}"
+                                  th:value="${ti.tiLlave}"
+                                  th:text="${ti.tiDesc}"
+                                />
+                              </select>
+                            </div>
+                            <div class="col-md-6">
+                              <label class="small mb-1" for="abIdentidad">Número Identidad</label>
+                              <input class="form-control" id="abIdentidad" type="text" placeholder="Número Identidad de Alumno" th:field="*{abIdentidad}" />
+                            </div>
+                          </div>
+                          <!-- Form Row        -->
+                          <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                              <label class="small mb-1" for="abDireccionRes">Dirección</label>
+                              <input class="form-control" id="abDireccionRes" type="text" placeholder="Dirección residencia de Alumno" th:field="*{abDireccionRes}" />
+                            </div>
+                            <div class="col-md-6">
+                              <label class="small mb-1" for="abTelefonoRes">Teléfono</label>
+                              <input class="form-control" id="abTelefonoRes" type="text" placeholder="Teléfono residencia de Alumno" th:field="*{abTelefonoRes}" />
+                            </div>
+                          </div>
+                          <!-- Form Row        -->
+                          <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                              <label class="small mb-1" for="abHorario">Horario</label>
+                              <select class="form-control" id="abHorario" th:field="*{horariosDto.hoLlave}" >
+                                <option
+                                  th:each="ho:${horarios}"
+                                  th:value="${ho.hoLlave}"
+                                  th:text="${ho.hoDesc}"
+                                />
+                              </select>
+                            </div>
+                            <div class="col-md-6">
+                              <label class="small mb-1" for="abNivelIngreso">Nivel Ingreso</label>
+                              <select class="form-control" id="abNivelIngreso" th:field="*{gradosDto.grLlave}" >
+                                <option
+                                  th:each="gr:${grados}"
+                                  th:value="${gr.grLlave}"
+                                  th:text="${gr.grDesc}"
+                                />
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-check form-switch col-md-12 ml-4">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="abEstado"
+                              value="abEstado"
+                              th:field="*{abEstado}"
+                            />
+                            <label for="abEstado" class="form-check-label"
+                              >Activo</label
+                            >
+                          </div>
+                      </div>
+                      <div class="card-footer">
+                        <input
+                          type="submit"
+                          class="btn btn-primary"
+                          value="Guardar"
+                        />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <!-- End of Main Content -->
+          <footer th:replace="layout/footer :: _footer"></footer>
+        </div>
+      </div>
+    </div>
+    <!-- End of Content Wrapper -->
+
+    <a th:replace="layout/modallogout :: stopbot"></a>
+
+    <div th:replace="layout/modallogout :: modal_logout"></div>
+
+    <!-- 	Modal para crear usuario -->
+
+    <!-- Fin Modal -->
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+    <!-- Page level plugins -->
+    <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+
+    <!-- Page level custom scripts -->
+    <script th:src="@{/js/demo/chart-area-demo.js}"></script>
+    <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+    <script
+      th:src="@{/vendor/bootstrap/js/bootstrap-datepicker.min.js}"
+    ></script>
+    <script
+      th:src="@{/vendor/bootstrap/js/clockpicker.js}"
+    ></script>
+    <!-- <script th:src="@{/vendor/bootstrap/js/moment.min.js}"></script> -->
+    <!-- <script th:src="@{/vendor/bootstrap/js/jquery.min.js}"></script> -->
+    <!-- <script th:src="@{/vendor/bootstrap/js/tempus-dominus.min.js}"></script> -->
+    <script type="text/javascript">
+      $(".clockpicker").clockpicker();
+    </script>
+  </body>
+</html>

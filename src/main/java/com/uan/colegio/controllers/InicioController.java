@@ -40,6 +40,7 @@ public class InicioController {
 		if(optUsuario.isPresent() ){
 			session.setAttribute("user_session_id", optUsuario.get().getUsLlave());
 			session.setAttribute("user_name", optUsuario.get().getUsNombres()+" "+optUsuario.get().getUsApellidos());
+			
 			return "redirect:/inicio";
 		}else{
 			return "redirect:/login";

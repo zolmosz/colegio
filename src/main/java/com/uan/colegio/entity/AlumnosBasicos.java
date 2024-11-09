@@ -5,12 +5,17 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.UUID;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +35,8 @@ public class AlumnosBasicos {
 	private String abCodigo;
 	private String abNombres;
 	private String abApellidos;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date abFechaNac;
 	private BigInteger abEdad;
 	private String abGrupoRh;
@@ -46,6 +53,8 @@ public class AlumnosBasicos {
 	@ManyToOne
     @JoinColumn(name = "ab_horario_escolar")
 	private Horarios horarios;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date abFechaIngreso;
 	private String abFoto;
 	@ManyToOne

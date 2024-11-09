@@ -87,4 +87,11 @@ public class AlumnosBasicosServiceImpl extends GenericServiceImpl<AlumnosBasicos
 		AlumnosBasicosDao.deleteById(id);		
 	}
 
+	@Override
+	public byte[] getFotoActual(UUID id) {
+		Optional<AlumnosBasicos> alumnosBasicos = this.AlumnosBasicosDao.findById(id);
+		AlumnosBasicosDto alumnosBasicosDto = MHelpers.modelMapper().map(alumnosBasicos.get(), AlumnosBasicosDto.class);
+		return alumnosBasicosDto.getAbFotoImg();
+	}
+
 }
