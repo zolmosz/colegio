@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
+    <!-- <meta charset="ISO-8859-1"> -->
+    <meta charset="UTF-8" />
+    <title></title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" th:href="@{assets/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{assets/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{assets/css/form-elements.css}">
+    <link rel="stylesheet" th:href="@{assets/css/style.css}">
+  </head>
+  <body>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <lu th:replace="layout/leftsidebar :: leftSide_bar"></lu>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <nav th:replace="layout/topnavbar :: top_navbar"></nav>
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid" layout:fragment="page-content">
+            <!-- 									/.container-fluid -->
+            <h1 th:text="${titulo}"></h1>
+
+            <div class="row">
+              <div class="container">
+                <!-- Barra de progreso -->
+                <div class="progress">
+                  <div class="progress-bar" id="progressBar" style="width: 33%;"></div>
+                </div>
+              
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="card shadow mb-4">
+                      <!-- Card Header - Dropdown -->
+                      <div
+                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                      >
+                        <h6 class="m-0 font-weight-bold text-primary">
+                          Crear Datos Familiares
+                        </h6>
+                      </div>
+                      <div class="card-body">
+                        <form
+                          th:object="${alumnofam}"
+                          th:action="@{/views/alumnosfam/salvar}"
+                          method="post"
+                        >
+                          <!-- Paso 1 -->
+                          <div class="form-step" id="step1">
+                            <!-- Campos de formulario del paso 1 -->
+                            <div class="card-body">
+                              <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <input type="hidden" th:field="*{afLlave}" />
+                                  <label for="afAlumno">Alumno</label>
+                                  <select
+                                    class="form-control"
+                                    id="afAlumno"
+                                    th:field="*{alumnosBasicosDto.abLlave}"
+                                  >
+                                    <option
+                                      th:each="ab:${alumnosbas}"
+                                      th:value="${ab.abLlave}"
+                                      th:text="${ab.abNombres}+${ab.abApellidos}"
+                                    />
+                                  </select>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                  <label for="abColegio">Colegio</label>
+                                  <select
+                                    class="form-control"
+                                    id="abColegio"
+                                    th:field="*{colegiosDto.coLlave}"
+                                  >
+                                    <option
+                                      th:each="col:${colegios}"
+                                      th:value="${col.coLlave}"
+                                      th:text="${col.coNombre}"
+                                    />
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="form-group col-md-12">
+                                  <label for="afNombreMadre">Nombre Madre</label>
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="afNombreMadre"
+                                    placeholder="Nombre de la madre"
+                                    th:field="*{afNombreMadre}"
+                                  />
+                                </div>
+                              </div>
+                              <div class="form-row"> 
+                                <div class="col-md-4 mb-4">
+                                  <label for="afTipoIdentMad">Tipo Identificación</label>
+                                  <select
+                                    class="form-control"
+                                    id="afTipoIdentMad"
+                                    th:field="*{tipoIdentMadDto.tiLlave}"
+                                  >
+                                    <option
+                                      th:each="ti:${tipident}"
+                                      th:value="${ti.tiLlave}"
+                                      th:text="${ti.tiDesc}"
+                                    />
+                                  </select>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afIdentMad">Número Identificación</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afIdentMad"
+                                  placeholder="Número identificación de la madre"
+                                  th:field="*{afIdentMad}"/>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afLugarExpedMad">Lugar de Expedición</label>
+                                  <select
+                                    class="form-control"
+                                    id="afLugarExpedMad"
+                                    th:field="*{ciudadExpedMadDto.ciLlave}"
+                                  >
+                                    <option
+                                      th:each="ci:${ciudades}"
+                                      th:value="${ci.ciLlave}"
+                                      th:text="${ci.ciNombre}"
+                                    />
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4 mb-4">
+                                  <label for="afDirResMad">Dirección Residencia Madre</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afDirResMad"
+                                  placeholder="Dirección residencia de la madre"
+                                  th:field="*{afDirResMad}"/>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afTelResMad">Teléfono Residencia Madre</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afTelResMad"
+                                  placeholder="Teléfono residencia de la madre"
+                                  th:field="*{afTelResMad}"/>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afBarrioResMad">Barrio Residencia Madre</label>
+                                  <select
+                                    class="form-control"
+                                    id="afBarrioResMad"
+                                    th:field="*{barrioResMadDto.baLlave}"
+                                  >
+                                    <option
+                                      th:each="ba:${barrios}"
+                                      th:value="${ba.baLlave}"
+                                      th:text="${ba.baNombre}"
+                                    />
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4 mb-4">
+                                  <label for="afEmpresaMad">Empresa Trabajo Madre</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afEmpresaMad"
+                                  placeholder="Empresa dónde trabaja la madre"
+                                  th:field="*{afEmpresaMad}"/>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afDirTrabMad">Dirección Trabajo Madre</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afDirTrabMad"
+                                  placeholder="Dirección trabajo de la madre"
+                                  th:field="*{afDirTrabMad}"/>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afTelTrabMad">Teléfono Trabajo Madre</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afTelTrabMad"
+                                  placeholder="Teléfono trabajo de la madre"
+                                  th:field="*{afTelTrabMad}"/>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-6 mb-4">
+                                  <label for="afTelMovilMad">Teléfono Móvil Madre</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afTelMovilMad"
+                                  placeholder="Teléfono móvil de la madre"
+                                  th:field="*{afTelMovilMad}"/>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                  <label for="afProfesionMadre">Profesión Madre</label>
+                                  <select
+                                    class="form-control"
+                                    id="afProfesionMadre"
+                                    th:field="*{profesionMadreDto.prLlave}"
+                                  >
+                                    <option
+                                      th:each="pr:${profesiones}"
+                                      th:value="${pr.prLlave}"
+                                      th:text="${pr.prNombre}"
+                                    />
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-6 mb-4">
+                                  <label for="afEmailMadre">E-mail Madre</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afEmailMadre"
+                                  placeholder="E-mail de la madre"
+                                  th:field="*{afEmailMadre}"/>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                  <input class="form-check-input" type="checkbox" id="afViveMenMadre" th:field="*{afViveMenMadre}">
+                                  <label for="afViveMenMadre" class="form-check-label" >Vive el menor con la Madre?</label>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-12 mb-4">
+                                  <label for="afObsRespMadre">Observaciones Responsable Madre</label>
+                                  <textarea rows="3"
+                                  class="form-control"
+                                  id="afObsRespMadre"
+                                  placeholder="Observaciones responsable madre"
+                                  th:field="*{afObsRespMadre}"/>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card-footer">
+                              <button type="button" class="btn btn-primary" onclick="nextStep(2)">Siguiente</button>
+                            </div>
+                          </div>
+                        
+                          <!-- Paso 2 -->
+                          <div class="form-step d-none" id="step2">
+                            <!-- Campos de formulario del paso 2 -->
+                            <div class="card-body">
+                              <div class="form-row">
+                                <div class="form-group col-md-12">
+                                  <label for="afNombrePadre">Nombre Padre</label>
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="afNombrePadre"
+                                    placeholder="Nombre del padre"
+                                    th:field="*{afNombrePadre}"
+                                  />
+                                </div>
+                              </div>
+                              <div class="form-row"> 
+                                <div class="col-md-4 mb-4">
+                                  <label for="afTipoIdentPad">Tipo Identificación</label>
+                                  <select
+                                    class="form-control"
+                                    id="afTipoIdentPad"
+                                    th:field="*{tipoIdentPadDto.tiLlave}"
+                                  >
+                                    <option
+                                      th:each="ti:${tipident}"
+                                      th:value="${ti.tiLlave}"
+                                      th:text="${ti.tiDesc}"
+                                    />
+                                  </select>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afIdentPad">Número Identificación</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afIdentPad"
+                                  placeholder="Número identificación del padre"
+                                  th:field="*{afIdentPad}"/>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afLugarExpedPad">Lugar de Expedición</label>
+                                  <select
+                                    class="form-control"
+                                    id="afLugarExpedPad"
+                                    th:field="*{ciudadExpedPadDto.ciLlave}"
+                                  >
+                                    <option
+                                      th:each="ci:${ciudades}"
+                                      th:value="${ci.ciLlave}"
+                                      th:text="${ci.ciNombre}"
+                                    />
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4 mb-4">
+                                  <label for="afDirResPad">Dirección Residencia Padre</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afDirResPad"
+                                  placeholder="Dirección residencia de la padre"
+                                  th:field="*{afDirResPad}"/>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afTelResPad">Teléfono Residencia Padre</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afTelResPad"
+                                  placeholder="Teléfono residencia de la padre"
+                                  th:field="*{afTelResPad}"/>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afBarrioResPad">Barrio Residencia Padre</label>
+                                  <select
+                                    class="form-control"
+                                    id="afBarrioResPad"
+                                    th:field="*{barrioResPadDto.baLlave}"
+                                  >
+                                    <option
+                                      th:each="ba:${barrios}"
+                                      th:value="${ba.baLlave}"
+                                      th:text="${ba.baNombre}"
+                                    />
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4 mb-4">
+                                  <label for="afEmpTrabPad">Empresa Trabajo Padre</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afEmpTrabPad"
+                                  placeholder="Empresa dónde trabaja el padre"
+                                  th:field="*{afEmpTrabPad}"/>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afDirTrabPad">Dirección Trabajo Padre</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afDirTrabPad"
+                                  placeholder="Dirección trabajo del padre"
+                                  th:field="*{afDirTrabPad}"/>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afTelTrabPad">Teléfono Trabajo Padre</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afTelTrabPad"
+                                  placeholder="Teléfono trabajo del padre"
+                                  th:field="*{afTelTrabPad}"/>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-6 mb-4">
+                                  <label for="afTelMovilPad">Teléfono Móvil Padre</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afTelMovilPad"
+                                  placeholder="Teléfono móvil del padre"
+                                  th:field="*{afTelMovilPad}"/>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                  <label for="afProfPadre">Profesión Padre</label>
+                                  <select
+                                    class="form-control"
+                                    id="afProfPadre"
+                                    th:field="*{profPadDto.prLlave}"
+                                  >
+                                    <option
+                                      th:each="pr:${profesiones}"
+                                      th:value="${pr.prLlave}"
+                                      th:text="${pr.prNombre}"
+                                    />
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-6 mb-4">
+                                  <label for="afEmailPad">E-mail Padre</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afEmailPad"
+                                  placeholder="E-mail del padre"
+                                  th:field="*{afEmailPad}"/>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                  <input class="form-check-input" type="checkbox" id="afViveMenorPad" th:field="*{afViveMenorPad}">
+                                  <label for="afViveMenorPad" class="form-check-label" >Vive el menor con el Padre?</label>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-12 mb-4">
+                                  <label for="afObsRespPad">Observaciones Responsable Padre</label>
+                                  <textarea rows="3"
+                                  class="form-control"
+                                  id="afObsRespPad"
+                                  placeholder="Observaciones responsable padre"
+                                  th:field="*{afObsRespPad}"/>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card-footer">
+                              <button type="button" class="btn btn-secondary" onclick="prevStep(1)">Anterior</button>
+                              <button type="button" class="btn btn-primary" onclick="nextStep(3)">Siguiente</button>
+                            </div>
+                          </div>
+                          <!-- Paso 3 -->
+                          <div class="form-step d-none" id="step3">
+                            <!-- Campos de formulario del paso 3 -->
+                            <div class="card-body">
+                              <div class="form-row">
+                                <div class="form-group col-md-12">
+                                  <label for="afNomAcudiente">Nombre Acudiente</label>
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="afNomAcudiente"
+                                    placeholder="Nombre del acudiente"
+                                    th:field="*{afNomAcudiente}"
+                                  />
+                                </div>
+                              </div>
+                              <div class="form-row"> 
+                                <div class="col-md-4 mb-4">
+                                  <label for="afTipoIdentAcu">Tipo Identificación</label>
+                                  <select
+                                    class="form-control"
+                                    id="afTipoIdentAcu"
+                                    th:field="*{tipoIdentAcuDto.tiLlave}"
+                                  >
+                                    <option
+                                      th:each="ti:${tipident}"
+                                      th:value="${ti.tiLlave}"
+                                      th:text="${ti.tiDesc}"
+                                    />
+                                  </select>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afIdentAcu">Número Identificación</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afIdentAcu"
+                                  placeholder="Número identificación del acudiente"
+                                  th:field="*{afIdentAcu}"/>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afLugarExpedAcu">Lugar de Expedición</label>
+                                  <select
+                                    class="form-control"
+                                    id="afLugarExpedAcu"
+                                    th:field="*{ciudadExpedAcuDto.ciLlave}"
+                                  >
+                                    <option
+                                      th:each="ci:${ciudades}"
+                                      th:value="${ci.ciLlave}"
+                                      th:text="${ci.ciNombre}"
+                                    />
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4 mb-4">
+                                  <label for="afDirResAcu">Dirección Residencia Acudiente</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afDirResAcu"
+                                  placeholder="Dirección residencia del acudiente"
+                                  th:field="*{afDirResAcu}"/>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afTelResAcu">Teléfono Residencia Acudiente</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afTelResAcu"
+                                  placeholder="Teléfono residencia del acudiente"
+                                  th:field="*{afTelResAcu}"/>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                  <label for="afTelAcu">Teléfono Acudiente</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afTelAcu"
+                                  placeholder="Teléfono del acudiente"
+                                  th:field="*{afTelAcu}"/>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-6 mb-4">
+                                  <label for="afTelMovilAcu">Teléfono Móvil Acudiente</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afTelMovilAcu"
+                                  placeholder="Teléfono móvil del acudiente"
+                                  th:field="*{afTelMovilAcu}"/>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                  <label for="afProfesionAcu">Profesión Acudiente</label>
+                                  <select
+                                    class="form-control"
+                                    id="afProfesionAcu"
+                                    th:field="*{profesionAcuDto.prLlave}"
+                                  >
+                                    <option
+                                      th:each="pr:${profesiones}"
+                                      th:value="${pr.prLlave}"
+                                      th:text="${pr.prNombre}"
+                                    />
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-6 mb-4">
+                                  <label for="afParentescoAcu">Parentesco del Acudiente</label>
+                                  <input type="text"
+                                  class="form-control"
+                                  id="afParentescoAcu"
+                                  placeholder="Parentesco del acudiente"
+                                  th:field="*{afParentescoAcu}"/>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card-footer">
+                              <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Anterior</button>
+                              <button type="submit" class="btn btn-primary">Enviar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <!-- End of Main Content -->
+          <footer th:replace="layout/footer :: _footer"></footer>
+        </div>
+      </div>
+    </div>
+    <!-- End of Content Wrapper -->
+
+    <a th:replace="layout/modallogout :: stopbot"></a>
+
+    <div th:replace="layout/modallogout :: modal_logout"></div>
+
+    <!-- 	Modal para crear usuario -->
+
+    <!-- Fin Modal -->
+    <!-- Bootstrap core JavaScript-->
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+    <!-- Page level plugins -->
+    <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+
+    <!-- Page level custom scripts -->
+    <script th:src="@{/js/demo/chart-area-demo.js}"></script>
+    <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+
+    <!-- Pasos para multipafinas -->
+    <script th:src="@{assets/js/jquery-1.11.1.min.js}"></script>
+    <script th:src="@{assets/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{assets/js/jquery.backstretch.min.js}"></script>
+    <script th:src="@{assets/js/retina-1.1.0.min.js}"></script>
+    <script th:src="@{assets/js/scripts.js}"></script>
+  </body>
+</html>

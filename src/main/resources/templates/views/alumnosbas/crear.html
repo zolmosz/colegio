@@ -48,7 +48,11 @@
                 <!-- Profile picture card-->
                 <div class="card mb-4 mb-xl-0">
                     <form th:action="@{/views/alumnosbas/cargararch}" th:object="${alumnobas}" method="post" enctype="multipart/form-data">
-                        <div class="card-header">Foto de Alumno</div>
+                        <div class="card-header">
+                          <h6 class="m-0 font-weight-bold text-primary">
+                            Foto de Alumno
+                          </h6>
+                        </div>
                         <div class="card-body text-center">
                             <!-- Profile picture image-->
                             <img class="img-account-profile rounded-circle mb-2 img-fluid" th:src="${base64Image}" alt="" />
@@ -68,7 +72,11 @@
             </div>
             <div class="col-xl-8">
                 <div class="card mb-4">
-                  <div class="card-header">Información Alumno</div>
+                  <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      Información Alumno
+                    </h6>
+                  </div>
                   <!-- Card Header - Dropdown -->
                   <div class="card-body">
                     <form

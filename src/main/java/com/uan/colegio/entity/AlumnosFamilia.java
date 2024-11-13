@@ -6,6 +6,8 @@ import java.util.UUID;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,47 +22,73 @@ public class AlumnosFamilia {
 	@Id
     @GeneratedValue(generator = "uuid2")
 	private UUID afLlave;
-	private UUID afColegio;
-	private UUID afAlumno;
+	@ManyToOne
+    @JoinColumn(name = "af_colegio")
+    private Colegios Colegios;
+	@ManyToOne
+    @JoinColumn(name = "af_alumno")
+    private AlumnosBasicos alumnosBasicos;
 	private String afNombreMadre;
-	private UUID afTipoIdentMad;
+    @ManyToOne
+    @JoinColumn(name = "af_tipo_ident_mad")
+	private TiposIdentificacion tiposIdentMad;
 	private String afIdentMad;
-	private UUID afLugarExpedMad;
+    @ManyToOne
+    @JoinColumn(name = "af_lugar_exped_mad")
+	private Ciudades ciudadExpedMad;
 	private String afDirResMad;
 	private String afTelResMad;
-	private UUID afBarrioResMad;
+	@ManyToOne
+    @JoinColumn(name = "af_barrio_res_mad")
+    private Barrios barrioResMad;
 	private String afEmpresaMad;
 	private String afDirTrabMad;
 	private String afTelTrabMad;
 	private String afTelMovilMad;
-	private UUID afProfesionMadre;
+    @ManyToOne
+    @JoinColumn(name = "af_profesion_madre")
+	private Profesiones profesionMadre;
 	private String afEmailMadre;
 	private Boolean afViveMenMadre;
 	private String afObsRespMadre;
 	private String afNombrePadre;
-    private UUID afTipoIdentPad;
+    @ManyToOne
+    @JoinColumn(name = "afTipoIdentPad")
+    private TiposIdentificacion tipoIdentPad;
     private String afIdentPad;
-    private UUID afLugarExpedPad;
+    @ManyToOne
+    @JoinColumn(name = "af_lugar_exped_pad")
+    private Ciudades ciudadExpedPad;
     private String afDirResPad;
     private String afTelResPad;
-    private UUID afBarrioResPad;
+    @ManyToOne
+    @JoinColumn(name = "af_barrio_res_pad")
+    private Barrios barrioResPad;
     private String afEmpTrabPad;
     private String afDirTrabPad;
     private String afTelTrabPad;
     private String afTelMovilPad;
-    private UUID afProfPad;
+    @ManyToOne
+    @JoinColumn(name = "af_prof_pad")
+    private Profesiones profesionesPad;
     private String afEmailPad;
     private Boolean afViveMenorPad;
     private String afObsRespPad;
     private String afNomAcudiente;
-    private UUID afTipoIdentAcu;
+    @ManyToOne
+    @JoinColumn(name = "af_tipo_ident_acu")
+    private TiposIdentificacion tipoIdentAcu;
     private String afIdentAcu;
-    private UUID afLugarExpedAcu;
+    @ManyToOne
+    @JoinColumn(name = "af_lugar_exped_acu")
+    private Ciudades ciudadExpedAcu;
     private String afDirResAcu;
     private String afTelResAcu;
     private String afTelAcu;
     private String afTelMovilAcu;
-    private UUID afProfesionAcu;
+    @ManyToOne
+    @JoinColumn(name = "af_profesion_acu")
+    private Profesiones profesionAcu;
     private String afParentescoAcu;
     
 }

@@ -43,3 +43,13 @@ $(document).ready(function() {
   });
 
 });
+
+function nextStep(step) {
+  document.querySelectorAll('.form-step').forEach(el => el.classList.add('d-none'));
+  document.getElementById('step' + step).classList.remove('d-none');
+  document.getElementById('progressBar').style.width = (step * 33) + '%';
+}
+
+function prevStep(step) {
+  nextStep(step);
+}

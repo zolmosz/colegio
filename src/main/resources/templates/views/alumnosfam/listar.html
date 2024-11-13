@@ -39,9 +39,9 @@
 
 						<a
 							class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-							th:href="@{/views/profesiones/create}"> <i
+							th:href="@{/views/alumnosfam/create}"> <i
 							class="fas fa-plus fa-sm fa-fw mr-2 "></i><span>Adicionar
-								Profesion</span>
+								Datos familiares</span>
 						</a>
 					</div>
 
@@ -59,7 +59,7 @@
 											width="100%" cellspacing="0">
 											<thead>
 												<tr>
-													<th>C�digo</th>
+													<th>Alumno</th>
 													<th>Nombre</th>
 													<th>Estado</th>
 													<th>Editar</th>
@@ -67,23 +67,23 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr th:each="pr, iterStat:${profesiones}">
-													<td scope="row" hidden th:text="${pr.prLlave}"></td>
-													<th scope="row" th:text="${pr.prCodigo}"></th>
-													<td th:text="${pr.prNombre}"></td>
+												<tr th:each="af:${alumnos}">
+													<td scope="row" hidden th:text="${af.afLlave}"></td>
+													<th scope="row" th:text="${af.alumnosBasicosDto.abCodigo}"></th>
+													<td th:text="${af.alumnosBasicosDto.abNombres} + ${af.alumnosBasicosDto.abApellidos}"></td>
 													<td style="display: flex; justify-content: center; align-items: center;">
-														<input class="form-check-input"  th:value="${pr.prLlave}" th:checked="${pr.prEstado}" type="checkbox"  disabled/>
+														<input class="form-check-input"  th:value="${af.afLlave}" th:checked="${af.alumnosBasicosDto.abEstado}" type="checkbox"  disabled/>
 													</td>
 													<td><a
-														th:href="@{/views/profesiones/editar/{id}(id=${pr.prLlave})}">
+														th:href="@{/views/alumnosfam/editar/{id}(id=${af.afLlave})}">
 															<i class="fas fa-pencil-alt fa-sm fa-fw mr-2 "
 															style="color: orange;"></i>
 													</a> </td>
 													<td> 
-													<a th:href="@{/views/profesiones/eliminar/(id=${pr.prLlave})}"
+													<a th:href="@{/views/alumnosfam/eliminar/(id=${af.afLlave})}"
 														class="delBtn" data-toggle="modal"
-														data-target="#deleteModal" th:data-userid="${pr.prLlave}"
-														th:data-opcion="profesiones">
+														data-target="#deleteModal" th:data-userid="${af.afLlave}"
+														th:data-opcion="alumnosfam">
 															<i class="fas fa-trash fa-sm fa-fw mr-2 "
 															style="color: red;"></i>
 													</a></td>
