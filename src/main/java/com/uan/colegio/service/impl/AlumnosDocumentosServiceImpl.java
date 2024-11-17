@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.uan.colegio.commons.impl.GenericServiceImpl;
 import com.uan.colegio.dao.AlumnosDocumentosDao;
+import com.uan.colegio.dto.AlumnosBasicosDto;
 import com.uan.colegio.dto.AlumnosDocumentosDto;
+import com.uan.colegio.dto.ColegiosDto;
 import com.uan.colegio.entity.AlumnosDocumentos;
 import com.uan.colegio.service.AlumnosDocumentosService;
 import com.uan.colegio.utils.MHelpers;
@@ -32,6 +34,8 @@ public class AlumnosDocumentosServiceImpl extends GenericServiceImpl<AlumnosDocu
 
 			AlumnosDocumentosDto alumnosDocumentosDto = new AlumnosDocumentosDto();
 			alumnosDocumentosDto = MHelpers.modelMapper().map(alumnosDocumentos, AlumnosDocumentosDto.class);
+			alumnosDocumentosDto.setColegiosDto(MHelpers.modelMapper().map(alumnosDocumentos.getColegios(), ColegiosDto.class));
+			alumnosDocumentosDto.setAlumnosBasicosDto(MHelpers.modelMapper().map(alumnosDocumentos.getAlumnosBasicos(), AlumnosBasicosDto.class));
 			listaalumnosDocumentosDto.add(alumnosDocumentosDto);
 		}
 
@@ -42,6 +46,8 @@ public class AlumnosDocumentosServiceImpl extends GenericServiceImpl<AlumnosDocu
 	public AlumnosDocumentosDto findByid(UUID id) {
 		Optional<AlumnosDocumentos> alumnosDocumentos = this.AlumnosDocumentosDao.findById(id);
 		AlumnosDocumentosDto alumnosDocumentosDto = MHelpers.modelMapper().map(alumnosDocumentos.get(), AlumnosDocumentosDto.class);
+		alumnosDocumentosDto.setColegiosDto(MHelpers.modelMapper().map(alumnosDocumentos.get().getColegios(), ColegiosDto.class));
+		alumnosDocumentosDto.setAlumnosBasicosDto(MHelpers.modelMapper().map(alumnosDocumentos.get().getAlumnosBasicos(), AlumnosBasicosDto.class));
 
 		return alumnosDocumentosDto;
 	}

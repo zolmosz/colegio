@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class AlumnosDocumentosDto {
 	private UUID adLlave;
-    private UUID adColegio;
-    private UUID adAlumno;
+    private ColegiosDto colegiosDto;
+    private AlumnosBasicosDto alumnosBasicosDto;
     
     private byte[] adFormInscripcionMatricula;
     private byte[] adRegistroCivilNac;

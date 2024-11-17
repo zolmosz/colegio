@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
+    <!-- <meta charset="ISO-8859-1"> -->
+    <meta charset="UTF-8" />
+    <title></title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+    <link
+      th:href="@{/vendor/bootstrap/css/bootstrap-datepicker.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/vendor/bootstrap/css/clockpicker.css}"
+      rel="stylesheet"
+    />
+    <!-- <link th:href="@{/vendor/bootstrap/css/tempus-dominus.min.css}" rel="stylesheet" /> -->
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <lu th:replace="layout/leftsidebar :: leftSide_bar"></lu>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <nav th:replace="layout/topnavbar :: top_navbar"></nav>
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid" layout:fragment="page-content">
+            <!-- 									/.container-fluid -->
+            <h1 th:text="${titulo}"></h1>
+            <div class="row"> 
+            <div class="col-lg-12">
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      Información Alumno
+                    </h6>
+                  </div>
+                  <!-- Card Header - Dropdown -->
+                  <div class="card-body">
+                    <form
+                      th:object="${alumnodoc}"
+                      th:action="@{/views/alumnosdoc/salvar}"
+                      method="post"
+                      enctype="multipart/form-data"
+                    >
+                      <div class="card-body">
+                          <!-- Form Group (username)-->
+                          <div class="mb-3">
+                            <input type="hidden" th:field="*{adLlave}" />
+                            <label class="small mb-1" for="adAlumno">Alumno</label>
+                            <select class="form-control" id="adAlumno" th:field="*{alumnosBasicosDto.abLlave}" >
+                              <option
+                                th:each="ab:${alumnos}"
+                                th:value="${ab.abLlave}"
+                                th:text="${ab.abNombres}+${ab.abApellidos}"
+                              />
+                            </select>
+                          </div>
+                          <div class="row gx-3 mb-3">
+                            <div class="col-md-12">
+                              <label class="small mb-1" for="adColegio">Colegio</label>
+                              <select class="form-control" id="adColegio" th:field="*{colegiosDto.coLlave}" >
+                                <option
+                                  th:each="col:${colegios}"
+                                  th:value="${col.coLlave}"
+                                  th:text="${col.coNombre}"
+                                />
+                              </select>
+                            </div>
+
+                            <!-- <div class="row mb-3 ml-1"> -->
+                              <div class="col-md-8">
+                                <label class="small mb-1" for="formIns">Formulario Inscripción Matricula</label>
+                                <input class="form-control" id="formIns" name="formIns" type="file" ></input>
+                              </div>
+                              <div class="col-md-4">
+                                <hr style="border: none; height: 5px; background-color: transparent;">
+                                <a th:if="*{adFormInscripcionMatricula != null}" th:href="@{/views/alumnosdoc/verdoc/(doc=${b64IformIns})}"
+                                  data-toggle="modal"
+                                  data-target="#VerDocModal">
+                                    <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="50" height="50">
+                                </a>
+    													  <img th:if="*{adFormInscripcionMatricula == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                              </div>
+                            <!-- </div> -->
+                            
+                            <div class="col-md-8">
+                              <label class="small mb-1" for="regCiv">Registro Civil de Nacimiento</label>
+                              <input class="form-control" id="regCiv" name="regCiv" type="file" ></input>
+                            </div>
+                            <div class="col-md-4">
+                              <hr style="border: none; height: 5px; background-color: transparent;">
+                              <a th:if="*{adRegistroCivilNac != null}"
+                                  class="verDocBtn"
+                                  href="#"
+                                  data-toggle="modal"
+                                  data-target="#verDocModal"
+                                  th:data-tipodoc="regCiv"
+														      th:data-imgdoc="${b64IregCiv}"
+                                  >
+                                    <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="30" height="30">
+                                </a>
+    													  <img th:if="*{adRegistroCivilNac == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                                
+                              </div>
+                            </div>
+                            <div>
+                              <!-- <embed th:src="@{(/img/archivo-pru.pdf)}" width="100%" height="500px"></embed> -->
+                              <iframe th:src="@{/img/archivo-pru.pdf}" width="100%" height="500px" frameborder="0"></iframe>
+                            </div>
+                            
+
+                            <div class="col-md-8">
+                              <label class="small mb-1" for="carnVac">Carné de Vacunación</label>
+                              <input class="form-control" id="carnVac" name="carnVac" type="file" ></input>
+                            </div>
+                            <div class="col-md-4">
+                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64IcarnVac}" alt="" />
+                            </div>
+
+                            <div class="col-md-8">
+                              <label class="small mb-1" for="certEps">Certificado Afiliación EPS o Medicina Prepagada</label>
+                              <input class="form-control" id="certEps" name="certEps" type="file" ></input>
+                            </div>
+                            <div class="col-md-4">
+                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64IcertEps}" alt="" />
+                            </div>
+
+                            <div class="col-md-8">
+                              <label class="small mb-1" for="fotos">Fotos Alumno</label>
+                              <input class="form-control" id="fotos" name="fotos" type="file" ></input>
+                            </div>
+                            <div class="col-md-4">
+                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64Ifotos}" alt="" />
+                            </div>
+
+                            <div class="col-md-8">
+                              <label class="small mb-1" for="certCd">Certificado de Crecimiento y Desarrollo</label>
+                              <input class="form-control" id="certCd" name="certCd" type="file" ></input>
+                            </div>
+                            <div class="col-md-4">
+                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64IcertCd}" alt="" />
+                            </div>
+
+                            <div class="col-md-8">
+                              <label class="small mb-1" for="certVa">Certificado Valoración Visual y Auditiva</label>
+                              <input class="form-control" id="certVa" name="certVa" type="file" ></input>
+                            </div>
+                            <div class="col-md-4">
+                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64IcertVa}" alt="" />
+                            </div>
+
+                            <div class="col-md-8">
+                              <label class="small mb-1" for="cedMad">Cédula de Ciudadanía Madre</label>
+                              <input class="form-control" id="cedMad" name="cedMad" type="file" ></input>
+                            </div>
+                            <div class="col-md-4">
+                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64IcedMad}" alt="" />
+                            </div>
+
+                            <div class="col-md-8">
+                              <label class="small mb-1" for="cedPad">Cédula de Ciudadanía Padre</label>
+                              <input class="form-control" id="cedPad" name="cedPad" type="file" ></input>
+                            </div>
+                            <div class="col-md-4">
+                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64IcedPad}" alt="" />
+                            </div>
+
+                            <div class="col-md-8">
+                              <label class="small mb-1" for="contServ">Contrato de Prestación de Servicios</label>
+                              <input class="form-control" id="contServ" name="contServ" type="file" ></input>
+                            </div>
+                            <div class="col-md-4">
+                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64IcontServ}" alt="" />
+                            </div>
+
+                          </div>
+                      </div>
+                      <div class="card-footer">
+                        <input
+                          type="submit"
+                          class="btn btn-primary"
+                          value="Guardar"
+                        />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <!-- End of Main Content -->
+          <footer th:replace="layout/footer :: _footer"></footer>
+        </div>
+      </div>
+    </div>
+    <!-- End of Content Wrapper -->
+
+    <a th:replace="layout/modallogout :: stopbot"></a>
+
+    <div th:replace="layout/modallogout :: modal_logout"></div>
+
+    <!-- Ver Documento Modal-->
+    <div class="modal fade" id="verDocModal" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Visualiar Documento PDF</h5>
+            <button class="close" type="button" data-dismiss="modal"
+              aria-label="Close">
+            </button>
+          </div>
+          <div class="modal-body">
+            <h2 text="" id="tipoDocRef"></h2>
+            <embed src="" type="application/pdf" id="imgDocRef">
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button"
+              data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fin Modal -->
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+    <!-- Page level plugins -->
+    <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+
+    <!-- Page level custom scripts -->
+    <script th:src="@{/js/demo/chart-area-demo.js}"></script>
+    <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+    <script
+      th:src="@{/vendor/bootstrap/js/bootstrap-datepicker.min.js}"
+    ></script>
+    <script
+      th:src="@{/vendor/bootstrap/js/clockpicker.js}"
+    ></script>
+    <!-- <script th:src="@{/vendor/bootstrap/js/moment.min.js}"></script> -->
+    <!-- <script th:src="@{/vendor/bootstrap/js/jquery.min.js}"></script> -->
+    <!-- <script th:src="@{/vendor/bootstrap/js/tempus-dominus.min.js}"></script> -->
+    <script type="text/javascript">
+      $(".clockpicker").clockpicker();
+    </script>
+  </body>
+</html>
