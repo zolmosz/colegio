@@ -21,15 +21,17 @@ $(document).ready(function() {
 
   $('#verDocModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Botón que abrió el modal
-        var tipDoc = button.data('tipdoc'); // Capturamos el valor de data-userid
+        var tipDoc = button.data('tipodoc'); // Capturamos el valor de data-userid
         var imgDoc = button.data('imgdoc');
 		
+        if (tipDoc === 'regCiv') {
+          tipDoc = 'Registro Civil de Nacimiento';
+        }
         // Actualizamos el enlace "Ver Documento" dentro del modal con el ID capturado
         var modal = $(this);
-        modal.find('#tipDocRef').attr('text', 'tipDoc');
-        modal.find('#imgDocRef').attr('src', 'imgDoc');
+        modal.find('#tipoDocRef').text(tipDoc);
+        modal.find('#imgDocRef').attr('src', imgDoc);
         
-        @REM modal.find('#verDocRef').attr('href', '/views/'+opcion+'/verdoc');
     });
 
 

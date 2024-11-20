@@ -23,6 +23,9 @@
       th:href="@{/vendor/bootstrap/css/clockpicker.css}"
       rel="stylesheet"
     />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+	        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
     <!-- <link th:href="@{/vendor/bootstrap/css/tempus-dominus.min.css}" rel="stylesheet" /> -->
 
     <!-- Custom styles for this template-->
@@ -91,12 +94,17 @@
                               </div>
                               <div class="col-md-4">
                                 <hr style="border: none; height: 5px; background-color: transparent;">
-                                <a th:if="*{adFormInscripcionMatricula != null}" th:href="@{/views/alumnosdoc/verdoc/(doc=${b64IformIns})}"
-                                  data-toggle="modal"
-                                  data-target="#VerDocModal">
-                                    <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="50" height="50">
-                                </a>
-    													  <img th:if="*{adFormInscripcionMatricula == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                                <a th:if="*{adFormInscripcionMatricula != null}"
+                                    class="verDocBtn"
+                                    href="#"
+                                    data-toggle="modal"
+                                    data-target="#verDocModal"
+                                    th:data-tipodoc="formIns"
+                                    th:data-imgdoc="${b64IformIns}"
+                                    >
+                                      <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                  </a>
+                                  <img th:if="*{adFormInscripcionMatricula == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
                               </div>
                             <!-- </div> -->
                             
@@ -114,81 +122,165 @@
                                   th:data-tipodoc="regCiv"
 														      th:data-imgdoc="${b64IregCiv}"
                                   >
-                                    <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="30" height="30">
+                                    <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
                                 </a>
     													  <img th:if="*{adRegistroCivilNac == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
-                                
-                              </div>
                             </div>
-                            <div>
-                              <!-- <embed th:src="@{(/img/archivo-pru.pdf)}" width="100%" height="500px"></embed> -->
-                              <iframe th:src="@{/img/archivo-pru.pdf}" width="100%" height="500px" frameborder="0"></iframe>
-                            </div>
+                            <!-- <div>
+                              <embed th:src="${b64IregCiv}" width="456px" height="500px"></embed>
+                            </div> -->
                             
-
                             <div class="col-md-8">
                               <label class="small mb-1" for="carnVac">Carné de Vacunación</label>
                               <input class="form-control" id="carnVac" name="carnVac" type="file" ></input>
                             </div>
                             <div class="col-md-4">
-                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64IcarnVac}" alt="" />
-                            </div>
+                              <hr style="border: none; height: 5px; background-color: transparent;">
+                              <a th:if="*{adCarneVacunas != null}"
+                                  class="verDocBtn"
+                                  href="#"
+                                  data-toggle="modal"
+                                  data-target="#verDocModal"
+                                  th:data-tipodoc="carnVac"
+														      th:data-imgdoc="${b64IcarnVac}"
+                                  >
+                                    <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                </a>
+    													  <img th:if="*{adCarneVacunas == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                              </div>
 
                             <div class="col-md-8">
                               <label class="small mb-1" for="certEps">Certificado Afiliación EPS o Medicina Prepagada</label>
                               <input class="form-control" id="certEps" name="certEps" type="file" ></input>
                             </div>
                             <div class="col-md-4">
-                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64IcertEps}" alt="" />
-                            </div>
+                              <hr style="border: none; height: 5px; background-color: transparent;">
+                              <a th:if="*{adCertAfiliacionEpsPrepagada != null}"
+                                  class="verDocBtn"
+                                  href="#"
+                                  data-toggle="modal"
+                                  data-target="#verDocModal"
+                                  th:data-tipodoc="certEps"
+														      th:data-imgdoc="${b64IcertEps}"
+                                  >
+                                    <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                </a>
+    													  <img th:if="*{adCertAfiliacionEpsPrepagada == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                              </div>
 
                             <div class="col-md-8">
                               <label class="small mb-1" for="fotos">Fotos Alumno</label>
                               <input class="form-control" id="fotos" name="fotos" type="file" ></input>
                             </div>
                             <div class="col-md-4">
-                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64Ifotos}" alt="" />
-                            </div>
+                              <hr style="border: none; height: 5px; background-color: transparent;">
+                              <a th:if="*{adFotos != null}"
+                                  class="verDocBtn"
+                                  href="#"
+                                  data-toggle="modal"
+                                  data-target="#verDocModal"
+                                  th:data-tipodoc="fotos"
+														      th:data-imgdoc="${b64Ifotos}"
+                                  >
+                                    <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                </a>
+    													  <img th:if="*{adFotos == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                              </div>
 
                             <div class="col-md-8">
                               <label class="small mb-1" for="certCd">Certificado de Crecimiento y Desarrollo</label>
                               <input class="form-control" id="certCd" name="certCd" type="file" ></input>
                             </div>
                             <div class="col-md-4">
-                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64IcertCd}" alt="" />
-                            </div>
+                              <hr style="border: none; height: 5px; background-color: transparent;">
+                              <a th:if="*{adCertCrecimientoDesarrollo != null}"
+                                  class="verDocBtn"
+                                  href="#"
+                                  data-toggle="modal"
+                                  data-target="#verDocModal"
+                                  th:data-tipodoc="certCd"
+														      th:data-imgdoc="${b64IcertCd}"
+                                  >
+                                    <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                </a>
+    													  <img th:if="*{adCertCrecimientoDesarrollo == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                              </div>
 
                             <div class="col-md-8">
                               <label class="small mb-1" for="certVa">Certificado Valoración Visual y Auditiva</label>
                               <input class="form-control" id="certVa" name="certVa" type="file" ></input>
                             </div>
                             <div class="col-md-4">
-                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64IcertVa}" alt="" />
-                            </div>
+                              <hr style="border: none; height: 5px; background-color: transparent;">
+                              <a th:if="*{adCertValoracionVisualAuditiva != null}"
+                                  class="verDocBtn"
+                                  href="#"
+                                  data-toggle="modal"
+                                  data-target="#verDocModal"
+                                  th:data-tipodoc="certVa"
+														      th:data-imgdoc="${b64IcertVa}"
+                                  >
+                                    <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                </a>
+    													  <img th:if="*{adCertValoracionVisualAuditiva == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                              </div>
 
                             <div class="col-md-8">
                               <label class="small mb-1" for="cedMad">Cédula de Ciudadanía Madre</label>
                               <input class="form-control" id="cedMad" name="cedMad" type="file" ></input>
                             </div>
                             <div class="col-md-4">
-                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64IcedMad}" alt="" />
-                            </div>
+                              <hr style="border: none; height: 5px; background-color: transparent;">
+                              <a th:if="*{adCedulaMadre != null}"
+                                  class="verDocBtn"
+                                  href="#"
+                                  data-toggle="modal"
+                                  data-target="#verDocModal"
+                                  th:data-tipodoc="cedMad"
+														      th:data-imgdoc="${b64IcedMad}"
+                                  >
+                                    <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                </a>
+    													  <img th:if="*{adCedulaMadre == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                              </div>
 
                             <div class="col-md-8">
                               <label class="small mb-1" for="cedPad">Cédula de Ciudadanía Padre</label>
                               <input class="form-control" id="cedPad" name="cedPad" type="file" ></input>
                             </div>
                             <div class="col-md-4">
-                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64IcedPad}" alt="" />
-                            </div>
+                              <hr style="border: none; height: 5px; background-color: transparent;">
+                              <a th:if="*{adCedulaPadre != null}"
+                                  class="verDocBtn"
+                                  href="#"
+                                  data-toggle="modal"
+                                  data-target="#verDocModal"
+                                  th:data-tipodoc="cedPad"
+														      th:data-imgdoc="${b64IcedPad}"
+                                  >
+                                    <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                </a>
+    													  <img th:if="*{adCedulaPadre == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                              </div>
 
                             <div class="col-md-8">
                               <label class="small mb-1" for="contServ">Contrato de Prestación de Servicios</label>
                               <input class="form-control" id="contServ" name="contServ" type="file" ></input>
                             </div>
                             <div class="col-md-4">
-                              <img class="img-account-profile mb-2 img-fluid" th:src="${b64IcontServ}" alt="" />
-                            </div>
+                              <hr style="border: none; height: 5px; background-color: transparent;">
+                              <a th:if="*{adContratoPrestServicios != null}"
+                                  class="verDocBtn"
+                                  href="#"
+                                  data-toggle="modal"
+                                  data-target="#verDocModal"
+                                  th:data-tipodoc="contServ"
+														      th:data-imgdoc="${b64IcontServ}"
+                                  >
+                                    <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                </a>
+    													  <img th:if="*{adContratoPrestServicios == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                              </div>
 
                           </div>
                       </div>
@@ -227,8 +319,8 @@
             </button>
           </div>
           <div class="modal-body">
-            <h2 text="" id="tipoDocRef"></h2>
-            <embed src="" type="application/pdf" id="imgDocRef">
+            <h2 id="tipoDocRef"></h2>
+            <embed src="" type="application/pdf" id="imgDocRef" width="100%" height="500px">
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button"
@@ -238,8 +330,8 @@
       </div>
     </div>
 
-    <!-- Fin Modal -->
     <!-- Bootstrap core JavaScript-->
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script th:src="@{/js/main.js}"></script>
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
