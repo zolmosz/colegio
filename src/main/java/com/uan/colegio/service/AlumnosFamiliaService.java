@@ -10,6 +10,7 @@ import com.uan.colegio.entity.AlumnosFamilia;
 public interface AlumnosFamiliaService extends GenericService<AlumnosFamilia, UUID>{
 	public List<AlumnosFamiliaDto> findAll();
 	public AlumnosFamiliaDto findByid(UUID id);
+	public AlumnosFamiliaDto findByAlumnosBasicos_AbLlave(UUID id);
 	public AlumnosFamiliaDto save(AlumnosFamiliaDto alumnosFamiliaDto) ;
 	void delete(AlumnosFamiliaDto alumnosFamiliaDto);
 	void deleteById(UUID id);

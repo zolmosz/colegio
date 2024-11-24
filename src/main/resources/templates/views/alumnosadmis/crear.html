@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
+    <!-- <meta charset="ISO-8859-1"> -->
+    <meta charset="UTF-8" />
+    <title></title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" th:href="@{assets/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{assets/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{assets/css/form-elements.css}">
+    <link rel="stylesheet" th:href="@{assets/css/style.css}">
+  </head>
+  <body>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <lu th:replace="layout/leftsidebar :: leftSide_bar"></lu>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <nav th:replace="layout/topnavbar :: top_navbar"></nav>
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid" layout:fragment="page-content">
+            <!-- 									/.container-fluid -->
+            <h1 th:text="${titulo}"></h1>
+
+            <div class="row">
+              <div class="container">
+                <!-- Barra de progreso -->
+                <div class="progress">
+                  <div class="progress-bar" id="progressBar" style="width: 20%;"></div>
+                </div>
+              
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="card shadow mb-4">
+                      <!-- Card Header - Dropdown -->
+                      <div
+                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                      >
+                        <h6 class="m-0 font-weight-bold text-primary">
+                          Consultar Datos Alumno
+                        </h6>
+                      </div>
+                      <div class="card-body">
+                        <form
+                          th:object="${alumnoscom}"
+                          th:action="@{/views/alumnosadmis/salvar}"
+                          method="post"
+                        >
+                          <!-- Paso 1 -->
+                          <div class="form-step" id="step1">
+                            
+                            <div class="card-body">
+                              <div class="">
+                                <h5 class="m-0 font-weight-bold text-primary">
+                                  Datos Básicos
+                                </h5>
+                              </div>
+                              <div class="form-row">
+                                <div class="form-group col-md-3">
+                                  <label >Foto</label>
+                                  <div class="card-body text-center">
+                                    <!-- Profile picture image-->
+                                    <img class="img-account-profile rounded-circle mb-2 img-fluid" style="height: 150px; width: 150px;" th:src="${base64Image}" alt="" />
+                                  </div>
+                                </div>
+                                  <div class="form-group justify-content-evenly col-md-9">
+                                    <div class="form-row">
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >Código Alumno:</label>
+                                        <label th:text="*{alumnosBasicosDto.abCodigo}"></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold">Colegio:</label>
+                                        <label th:text="*{alumnosBasicosDto.colegiosDto.coNombre}"></label>
+                                      </div>
+                                    </div>
+                                    <!-- <div class="w-100"></div> -->
+                                    <div class="form-row">
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >Nombres:</label>
+                                      <label th:text="*{alumnosBasicosDto.abNombres}"></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >Apellidos:</label>
+                                        <label th:text="*{alumnosBasicosDto.abApellidos}"></label>
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >Fecha de Nacimiento:</label>
+                                      <label th:text="*{alumnosBasicosDto.abFechaNac}"></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >Edad:</label>
+                                      <label th:text="*{alumnosBasicosDto.abEdad}"></label>
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >EPS:</label>
+                                      <label th:text="*{alumnosBasicosDto.epsDto.epsNombre}"></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >Grupo RH:</label>
+                                        <label th:text="*{alumnosBasicosDto.abGrupoRh}"></label>
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >Fecha Ingreso:</label>
+                                        <label th:text="*{alumnosBasicosDto.abFechaIngreso}"></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >Alergias:</label>
+                                        <label th:text="*{alumnosBasicosDto.abAlergias}"></label>
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >Tipo de Identidad:</label>
+                                        <label th:text="*{alumnosBasicosDto.tiposIdentificacionDto.tiDesc}"></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >Número Identidad:</label>
+                                        <label th:text="*{alumnosBasicosDto.abIdentidad}"></label>
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >Dirección:</label>
+                                        <label th:text="*{alumnosBasicosDto.abDireccionRes}"></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >Teléfono:</label>
+                                        <label th:text="*{alumnosBasicosDto.abTelefonoRes}"></label>
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >Horario:</label>
+                                        <label th:text="*{alumnosBasicosDto.horariosDto.hoDesc}"></label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label class="font-weight-bold" >Nivel de Ingreso:</label>
+                                        <label th:text="*{alumnosBasicosDto.gradosDto.grDesc}"></label>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="card-footer">
+                              <button type="button" class="btn btn-primary" onclick="nextStep(2,20)">Siguiente</button>
+                            </div>
+                          </div>
+                          <!-- Paso 2 -->
+                          <div class="form-step d-none" id="step2">
+                            <!-- Campos de formulario del paso 2 -->
+                            <div class="card-body">
+                              <div class="">
+                                <h5 class="mb-4 font-weight-bold text-primary">
+                                  Datos Familiares Madre
+                                </h5>
+                              </div>
+                              <div class="form-row">
+                                <div class="form-group col-md-12 ">
+                                  <label class="font-weight-bold">Alumno: </label>
+                                  <label th:text="*{alumnosBasicosDto.abNombres}+' '+*{alumnosBasicosDto.abApellidos}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-12">
+                                  <label class="font-weight-bold">Nombre Madre: </label>
+                                  <label th:text="*{alumnosFamiliaDto.afNombreMadre}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Tipo identificación:</label>
+                                  <label th:text="*{alumnosFamiliaDto.tipoIdentMadDto.tiDesc}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Número identificación:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afIdentMad}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Lugar de Expedición:</label>
+                                  <label th:text="*{alumnosFamiliaDto.ciudadExpedMadDto.ciNombre}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Dirección Residencia:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afDirResMad}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Teléfono Residencia:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afTelResMad}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Barrio Residencia:</label>
+                                  <label th:text="*{alumnosFamiliaDto.barrioResMadDto.baNombre}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Empresa Trabajo Madre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afEmpresaMad}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Dirección Trabajo Madre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afDirTrabMad}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Teléfono Trabajo Madre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afTelTrabMad}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Teléfono Móvil Madre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afTelMovilMad}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Profesión Madre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.profesionMadreDto.prNombre}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">E-mail Madre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afEmailMadre}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Vive el Menor con la Madre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afViveMenMadre}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-12">
+                                  <label class="font-weight-bold">Observaciones Responsable Madre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afObsRespMadre}" />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card-footer">
+                              <button type="button" class="btn btn-secondary" onclick="prevStep(1,20)">Anterior</button>
+                              <button type="button" class="btn btn-primary" onclick="nextStep(3,20)">Siguiente</button>
+                            </div>
+                          </div>
+                        
+                          <!-- Paso 3 -->
+                          <div class="form-step d-none" id="step3">
+                            <!-- Campos de formulario del paso 3 -->
+                            <div class="card-body">
+                              <div class="">
+                                <h5 class="mb-4 font-weight-bold text-primary">
+                                  Datos Familiares Padre
+                                </h5>
+                              </div>
+                              <div class="form-row">
+                                <div class="form-group col-md-12 ">
+                                  <label class="font-weight-bold">Alumno: </label>
+                                  <label th:text="*{alumnosBasicosDto.abNombres}+' '+*{alumnosBasicosDto.abApellidos}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-12">
+                                  <label class="font-weight-bold">Nombre Padre: </label>
+                                  <label th:text="*{alumnosFamiliaDto.afNombrePadre}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Tipo identificación:</label>
+                                  <label th:text="*{alumnosFamiliaDto.tipoIdentPadDto.tiDesc}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Número identificación:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afIdentPad}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Lugar de Expedición:</label>
+                                  <label th:text="*{alumnosFamiliaDto.ciudadExpedPadDto.ciNombre}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Dirección Residencia:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afDirResPad}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Teléfono Residencia:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afTelResPad}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Barrio Residencia:</label>
+                                  <label th:text="*{alumnosFamiliaDto.barrioResPadDto.baNombre}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Empresa Trabajo Padre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afEmpTrabPad}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Dirección Trabajo Padre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afDirTrabPad}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Teléfono Trabajo Padre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afTelTrabPad}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Teléfono Móvil Padre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afTelMovilPad}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Profesión Padre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.profPadDto.prNombre}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">E-mail Padre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afEmailPad}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Vive el Menor con la Padre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afViveMenorPad}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-12">
+                                  <label class="font-weight-bold">Observaciones Responsable Padre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afObsRespPad}" />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card-footer">
+                              <button type="button" class="btn btn-secondary" onclick="prevStep(2,20)">Anterior</button>
+                              <button type="button" class="btn btn-primary" onclick="nextStep(4,20)">Siguiente</button>
+                            </div>
+                          </div>
+                          <!-- Paso 4 -->
+                          <div class="form-step d-none" id="step4">
+                            <!-- Campos de formulario del paso 4 -->
+                            <div class="card-body">
+                              <div class="">
+                                <h5 class="mb-4 font-weight-bold text-primary">
+                                  Datos Familiares Acudiente
+                                </h5>
+                              </div>
+                              <div class="form-row">
+                                <div class="form-group col-md-12 ">
+                                  <label class="font-weight-bold">Alumno: </label>
+                                  <label th:text="*{alumnosBasicosDto.abNombres}+' '+*{alumnosBasicosDto.abApellidos}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-12">
+                                  <label class="font-weight-bold">Nombre Acudiente: </label>
+                                  <label th:text="*{alumnosFamiliaDto.afNomAcudiente}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Tipo identificación:</label>
+                                  <label th:text="*{alumnosFamiliaDto.tipoIdentAcuDto.tiDesc}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Número identificación:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afIdentAcu}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Lugar de Expedición:</label>
+                                  <label th:text="*{alumnosFamiliaDto.ciudadExpedAcuDto.ciNombre}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Dirección Residencia:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afDirResAcu}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Teléfono Residencia:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afTelResAcu}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Teléfono Acudiente:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afTelAcu}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Teléfono Móvil Acudiente:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afTelMovilAcu}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Profesión Acudiente:</label>
+                                  <label th:text="*{alumnosFamiliaDto.profesionAcuDto.prNombre}" />
+                                </div>
+                                <div class="col-md-4">
+                                  <label class="font-weight-bold">Parentesco Acudiente:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afParentescoAcu}" />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-12">
+                                  <label class="font-weight-bold">Observaciones Responsable Padre:</label>
+                                  <label th:text="*{alumnosFamiliaDto.afObsRespPad}" />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card-footer">
+                              <button type="button" class="btn btn-secondary" onclick="prevStep(3,20)">Anterior</button>
+                              <button type="button" class="btn btn-primary" onclick="nextStep(5,20)">Siguiente</button>
+                            </div>
+                          </div>
+                          <!-- Paso 5 -->
+                          <div class="form-step d-none" id="step5">
+                            <div class="card-body">
+                              <div class="">
+                                <h5 class="mb-4 font-weight-bold text-primary">
+                                  Datos Documentos
+                                </h5>
+                              </div>
+                              <div class="form-row">
+                                <div class="form-group col-md-6 ">
+                                  <label class="font-weight-bold">Alumno: </label>
+                                  <label th:text="*{alumnosBasicosDto.abNombres}+' '+*{alumnosBasicosDto.abApellidos}" />
+                                </div>
+                                <div class="col-md-6">
+                                  <label class="font-weight-bold">Colegio:</label>
+                                  <label th:text="*{alumnosBasicosDto.colegiosDto.coNombre}"></label>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-8">
+                                  <label class=" mb-1" >Registro Civil de Nacimiento</label>
+                                </div>
+                                <div class="col-md-4">
+                                  <!-- <hr style="border: none; height: 5px; background-color: transparent;"> -->
+                                  <a th:if="*{alumnosDocumentosDto.adRegistroCivilNac != null}"
+                                      class="verDocBtn"
+                                      href="#"
+                                      data-toggle="modal"
+                                      data-target="#verDocModal"
+                                      th:data-tipodoc="regCiv"
+                                      th:data-imgdoc="${b64IregCiv}"
+                                      >
+                                        <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                    </a>
+                                    <img th:if="*{alumnosDocumentosDto.adRegistroCivilNac == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-8">
+                                  <label class=" mb-1" >Carné de Vacunación</label>
+                                </div>
+                                <div class="col-md-4">
+                                  <a th:if="*{alumnosDocumentosDto.adCarneVacunas != null}"
+                                      class="verDocBtn"
+                                      href="#"
+                                      data-toggle="modal"
+                                      data-target="#verDocModal"
+                                      th:data-tipodoc="carnVac"
+                                      th:data-imgdoc="${b64IcarnVac}"
+                                      >
+                                        <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                  </a>
+                                    <img th:if="*{alumnosDocumentosDto.adCarneVacunas == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-8">
+                                  <label class=" mb-1" >Certificado Afiliación EPS o Medicina Prepagada</label>
+                                </div>
+                                <div class="col-md-4">
+                                  <a th:if="*{alumnosDocumentosDto.adCertAfiliacionEpsPrepagada != null}"
+                                      class="verDocBtn"
+                                      href="#"
+                                      data-toggle="modal"
+                                      data-target="#verDocModal"
+                                      th:data-tipodoc="carnVac"
+                                      th:data-imgdoc="${b64IcarnVac}"
+                                      >
+                                        <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                  </a>
+                                    <img th:if="*{alumnosDocumentosDto.adCertAfiliacionEpsPrepagada == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-8">
+                                  <label class=" mb-1" >Fotos Alumno</label>
+                                </div>
+                                <div class="col-md-4">
+                                  <a th:if="*{alumnosDocumentosDto.adFotos != null}"
+                                      class="verDocBtn"
+                                      href="#"
+                                      data-toggle="modal"
+                                      data-target="#verDocModal"
+                                      th:data-tipodoc="carnVac"
+                                      th:data-imgdoc="${b64IcarnVac}"
+                                      >
+                                        <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                  </a>
+                                    <img th:if="*{alumnosDocumentosDto.adFotos == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card-footer">
+                              <button type="button" class="btn btn-secondary" onclick="prevStep(4,20)">Anterior</button>
+                              <button type="submit" class="btn btn-primary">Enviar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <!-- End of Main Content -->
+          <footer th:replace="layout/footer :: _footer"></footer>
+        </div>
+      </div>
+    </div>
+    <!-- End of Content Wrapper -->
+
+    <a th:replace="layout/modallogout :: stopbot"></a>
+
+    <div th:replace="layout/modallogout :: modal_logout"></div>
+
+    <!-- Ver Documento Modal-->
+    <div class="modal fade" id="verDocModal" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Visualiar Documento PDF</h5>
+            <button class="close" type="button" data-dismiss="modal"
+              aria-label="Close">
+            </button>
+          </div>
+          <div class="modal-body">
+            <h2 id="tipoDocRef"></h2>
+            <embed src="" type="application/pdf" id="imgDocRef" width="100%" height="500px">
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button"
+              data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin Modal -->
+    <!-- Bootstrap core JavaScript-->
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+    <!-- Page level plugins -->
+    <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+
+    <!-- Page level custom scripts -->
+    <script th:src="@{/js/demo/chart-area-demo.js}"></script>
+    <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+
+    <!-- Pasos para multipafinas -->
+    <script th:src="@{assets/js/jquery-1.11.1.min.js}"></script>
+    <script th:src="@{assets/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{assets/js/jquery.backstretch.min.js}"></script>
+    <script th:src="@{assets/js/retina-1.1.0.min.js}"></script>
+    <script th:src="@{assets/js/scripts.js}"></script>
+  </body>
+</html>

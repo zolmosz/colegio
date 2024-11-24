@@ -53,6 +53,16 @@ public class AlumnosDocumentosServiceImpl extends GenericServiceImpl<AlumnosDocu
 	}
 
 	@Override
+	public AlumnosDocumentosDto findByAlumnosBasicos_AbLlave(UUID id) {
+		AlumnosDocumentos alumnosDocumentos = this.AlumnosDocumentosDao.findByAlumnosBasicos_AbLlave(id);
+		AlumnosDocumentosDto alumnosDocumentosDto = MHelpers.modelMapper().map(alumnosDocumentos, AlumnosDocumentosDto.class);
+		alumnosDocumentosDto.setColegiosDto(MHelpers.modelMapper().map(alumnosDocumentos.getColegios(), ColegiosDto.class));
+		alumnosDocumentosDto.setAlumnosBasicosDto(MHelpers.modelMapper().map(alumnosDocumentos.getAlumnosBasicos(), AlumnosBasicosDto.class));
+
+		return alumnosDocumentosDto;
+	}
+
+	@Override
 	public AlumnosDocumentosDto save(AlumnosDocumentosDto alumnosDocumentosDto) {
 		AlumnosDocumentos alumnosDocumentos = MHelpers.modelMapper().map(alumnosDocumentosDto, AlumnosDocumentos.class);
 

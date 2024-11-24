@@ -12,20 +12,32 @@ import org.springframework.stereotype.Service;
 import com.uan.colegio.commons.impl.GenericServiceImpl;
 import com.uan.colegio.dao.AlumnosBasicosDao;
 import com.uan.colegio.dto.AlumnosBasicosDto;
+import com.uan.colegio.dto.AlumnosCompletoDto;
 import com.uan.colegio.dto.ColegiosDto;
 import com.uan.colegio.dto.EpsDto;
 import com.uan.colegio.dto.GradosDto;
 import com.uan.colegio.dto.HorariosDto;
 import com.uan.colegio.dto.TiposIdentificacionDto;
 import com.uan.colegio.entity.AlumnosBasicos;
+import com.uan.colegio.entity.AlumnosDocumentos;
+import com.uan.colegio.entity.AlumnosFamilia;
 import com.uan.colegio.service.AlumnosBasicosService;
 import com.uan.colegio.utils.MHelpers;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Root;
 
 @Service
 public class AlumnosBasicosServiceImpl extends GenericServiceImpl<AlumnosBasicos, UUID> implements AlumnosBasicosService {
 
 	@Autowired
 	private AlumnosBasicosDao AlumnosBasicosDao;
+	@Autowired
+	private EntityManager entityManager;
 
 	@Override
 	public List<AlumnosBasicosDto> findAll() {
@@ -92,6 +104,58 @@ public class AlumnosBasicosServiceImpl extends GenericServiceImpl<AlumnosBasicos
 		Optional<AlumnosBasicos> alumnosBasicos = this.AlumnosBasicosDao.findById(id);
 		AlumnosBasicosDto alumnosBasicosDto = MHelpers.modelMapper().map(alumnosBasicos.get(), AlumnosBasicosDto.class);
 		return alumnosBasicosDto.getAbFotoImg();
+	}
+
+	@Override
+	public List<AlumnosBasicosDto> getAlumnosCompletos() {
+		List<AlumnosBasicos> listaAlumnosBasicos = new ArrayList<>();
+
+		// CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		// CriteriaQuery<AlumnosBasicos> query = cb.createQuery(AlumnosBasicos.class);
+
+		// Root<AlumnosBasicos> alumnosBasicos = query.from(AlumnosBasicos.class);
+		// alumnosBasicos.fetch("colegios", JoinType.LEFT); // Cambia LEFT o INNER según lo necesites
+		// alumnosBasicos.fetch("eps", JoinType.LEFT);
+		// alumnosBasicos.fetch("tiposIdentificacion", JoinType.LEFT);
+		// alumnosBasicos.fetch("horarios", JoinType.LEFT);
+		// alumnosBasicos.fetch("grados", JoinType.LEFT);
+
+		// Join<AlumnosBasicos, AlumnosFamilia> familiaJoin = alumnosBasicos.join("familia", JoinType.INNER);
+		// Join<AlumnosBasicos, AlumnosDocumentos> documentosJoin = alumnosBasicos.join("documentos", JoinType.INNER);
+
+		// query.select(alumnosBasicos)
+		// 	.where(cb.isNotNull(familiaJoin), cb.isNotNull(documentosJoin));
+
+		// listaAlumnosBasicos = entityManager.createQuery(query).getResultList();
+
+		String jpql = "SELECT a FROM AlumnosBasicos a " +
+                  "JOIN FETCH a.colegios " +
+                  "JOIN FETCH a.eps " +
+                  "JOIN FETCH a.tiposIdentificacion " +
+                  "JOIN FETCH a.horarios " +
+                  "JOIN FETCH a.grados " +
+                  "JOIN FETCH a.familia " +
+                  "JOIN FETCH a.documentos";
+
+		listaAlumnosBasicos = entityManager.createQuery(jpql, AlumnosBasicos.class).getResultList();
+
+		// Mapear la lista de entidades a una lista de DTOs
+		List<AlumnosBasicosDto> listaalumnosBasicosDto = new ArrayList<>();
+
+		for (AlumnosBasicos alumnosBas : listaAlumnosBasicos) {
+
+			AlumnosBasicosDto alumnosBasicosDto = new AlumnosBasicosDto();
+			alumnosBasicosDto = MHelpers.modelMapper().map(alumnosBas, AlumnosBasicosDto.class);
+			alumnosBasicosDto.setColegiosDto(MHelpers.modelMapper().map(alumnosBas.getColegios(), ColegiosDto.class));
+			alumnosBasicosDto.setEpsDto(MHelpers.modelMapper().map(alumnosBas.getEps(), EpsDto.class));
+			alumnosBasicosDto.setTiposIdentificacionDto(MHelpers.modelMapper().map(alumnosBas.getTiposIdentificacion(), TiposIdentificacionDto.class));
+			alumnosBasicosDto.setHorariosDto(MHelpers.modelMapper().map(alumnosBas.getHorarios(), HorariosDto.class));
+			alumnosBasicosDto.setGradosDto(MHelpers.modelMapper().map(alumnosBas.getGrados(), GradosDto.class));
+			listaalumnosBasicosDto.add(alumnosBasicosDto);
+		}
+
+
+		return listaalumnosBasicosDto;
 	}
 
 }

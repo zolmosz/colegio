@@ -16,7 +16,6 @@ import com.uan.colegio.dto.CiudadesDto;
 import com.uan.colegio.dto.ColegiosDto;
 import com.uan.colegio.dto.ProfesionesDto;
 import com.uan.colegio.dto.TiposIdentificacionDto;
-import com.uan.colegio.entity.AlumnosBasicos;
 import com.uan.colegio.service.AlumnosBasicosService;
 import com.uan.colegio.service.AlumnosFamiliaService;
 import com.uan.colegio.service.BarriosService;
@@ -87,8 +86,7 @@ public class AlumnosFamiliaController {
 	
 
 	@PostMapping("/salvar")
-	public String salvarAlumnos(@ModelAttribute AlumnosFamiliaDto alumnosFamiliaDto) throws IOException {
-		
+	public String salvarAlumnos(@ModelAttribute AlumnosFamiliaDto alumnosFamiliaDto) {
 		alumnosFamiliasrv.save(alumnosFamiliaDto);
 		
 		return "redirect:/views/alumnosfam/";

@@ -64,6 +64,12 @@
                           th:action="@{/views/alumnosfam/salvar}"
                           method="post"
                         >
+                          <div class="form-group col-md-12">
+                            <h4>
+                              <span class="badge bg-danger p-3 text-white bg-opacity-50 rounded-pill" th:text="${error}" ></span>
+                            </h4>
+                          </div>
+
                           <!-- Paso 1 -->
                           <div class="form-step" id="step1">
                             <!-- Campos de formulario del paso 1 -->
@@ -257,7 +263,7 @@
                               </div>
                             </div>
                             <div class="card-footer">
-                              <button type="button" class="btn btn-primary" onclick="nextStep(2)">Siguiente</button>
+                              <button type="button" class="btn btn-primary" onclick="nextStep(2,33)">Siguiente</button>
                             </div>
                           </div>
                         
@@ -423,8 +429,8 @@
                               </div>
                             </div>
                             <div class="card-footer">
-                              <button type="button" class="btn btn-secondary" onclick="prevStep(1)">Anterior</button>
-                              <button type="button" class="btn btn-primary" onclick="nextStep(3)">Siguiente</button>
+                              <button type="button" class="btn btn-secondary" onclick="prevStep(1,33)">Anterior</button>
+                              <button type="button" class="btn btn-primary" onclick="nextStep(3,33)">Siguiente</button>
                             </div>
                           </div>
                           <!-- Paso 3 -->
@@ -543,7 +549,7 @@
                               </div>
                             </div>
                             <div class="card-footer">
-                              <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Anterior</button>
+                              <button type="button" class="btn btn-secondary" onclick="prevStep(2,33)">Anterior</button>
                               <button type="submit" class="btn btn-primary">Enviar</button>
                             </div>
                           </div>
@@ -564,8 +570,13 @@
     <a th:replace="layout/modallogout :: stopbot"></a>
 
     <div th:replace="layout/modallogout :: modal_logout"></div>
+    
 
     <!-- 	Modal para crear usuario -->
+
+    <!-- <div id="modalContainer"></div>
+    <div th:replace="layout/modalerror :: modal_error"></div> -->
+
 
     <!-- Fin Modal -->
     <!-- Bootstrap core JavaScript-->

@@ -11,7 +11,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.uan.colegio.dto.AlumnosBasicosDto;
 import com.uan.colegio.dto.ColegiosDto;
 import com.uan.colegio.dto.TiposIdentificacionDto;
+import com.uan.colegio.enums.EstadosAlumnosEnum;
 import com.uan.colegio.dto.EpsDto;
 import com.uan.colegio.dto.GradosDto;
 import com.uan.colegio.dto.HorariosDto;
@@ -94,7 +94,6 @@ public class AlumnosBasicosController {
 
 	@PostMapping("/salvar")
 	public String salvarAlumnos(@ModelAttribute AlumnosBasicosDto alumnosBasicosDto, @RequestParam(value="foto", required = false) MultipartFile imagen) throws IOException {
-	// public String salvarAlumnos(@ModelAttribute AlumnosBasicosDto alumnosBasicosDto) throws IOException {
 		
 		if (!imagen.isEmpty() && imagen != null) {
 			Path directorioImagenes = Paths.get("src/main/resources/static/img/");
@@ -103,12 +102,12 @@ public class AlumnosBasicosController {
 			Path rutaCompleta = Paths.get(rutaAbsoluta+"/"+imagen.getOriginalFilename());
 			Files.write(rutaCompleta, imagen.getBytes());
 
-			//undraw_profile.svg
 			alumnosBasicosDto.setAbFotoImg(imagen.getBytes());
 		}else{
 			byte[] fotoActual = alumnosBasicossrv.getFotoActual(alumnosBasicosDto.getAbLlave());
 			alumnosBasicosDto.setAbFotoImg(fotoActual);
 		}
+		alumnosBasicosDto.setAbEstado(EstadosAlumnosEnum.REGISTRADO.getEstado());
 			
 		alumnosBasicossrv.save(alumnosBasicosDto);
 		

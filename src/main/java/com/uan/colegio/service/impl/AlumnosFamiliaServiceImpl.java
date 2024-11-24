@@ -60,7 +60,7 @@ public class AlumnosFamiliaServiceImpl extends GenericServiceImpl<AlumnosFamilia
 	@Override
 	public AlumnosFamiliaDto findByid(UUID id) {
 		Optional<AlumnosFamilia> alumnosFamilia = this.AlumnosFamiliaDao.findById(id);
-		AlumnosFamiliaDto alumnosFamiliaDto = MHelpers.modelMapper().map(alumnosFamilia.get(), AlumnosFamiliaDto.class);
+		AlumnosFamiliaDto alumnosFamiliaDto = MHelpers.modelMapper().map(alumnosFamilia, AlumnosFamiliaDto.class);
 		alumnosFamiliaDto.setColegiosDto(MHelpers.modelMapper().map(alumnosFamilia.get().getColegios(), ColegiosDto.class));
 		alumnosFamiliaDto.setAlumnosBasicosDto(MHelpers.modelMapper().map(alumnosFamilia.get().getAlumnosBasicos(), AlumnosBasicosDto.class));
 		alumnosFamiliaDto.setTipoIdentMadDto(MHelpers.modelMapper().map(alumnosFamilia.get().getTipoIdentPad(), TiposIdentificacionDto.class));
@@ -74,6 +74,28 @@ public class AlumnosFamiliaServiceImpl extends GenericServiceImpl<AlumnosFamilia
 		alumnosFamiliaDto.setCiudadExpedAcuDto(MHelpers.modelMapper().map(alumnosFamilia.get().getCiudadExpedAcu(), CiudadesDto.class));
 		alumnosFamiliaDto.setBarrioResMadDto(MHelpers.modelMapper().map(alumnosFamilia.get().getBarrioResMad(), BarriosDto.class));
 		alumnosFamiliaDto.setBarrioResPadDto(MHelpers.modelMapper().map(alumnosFamilia.get().getBarrioResPad(), BarriosDto.class));
+
+		return alumnosFamiliaDto;
+	}
+
+	@Override
+	public AlumnosFamiliaDto findByAlumnosBasicos_AbLlave(UUID id) {
+		AlumnosFamilia alumnosFamilia = this.AlumnosFamiliaDao.findByAlumnosBasicos_AbLlave(id);
+
+		AlumnosFamiliaDto alumnosFamiliaDto = MHelpers.modelMapper().map(alumnosFamilia, AlumnosFamiliaDto.class);
+		alumnosFamiliaDto.setColegiosDto(MHelpers.modelMapper().map(alumnosFamilia.getColegios(), ColegiosDto.class));
+		alumnosFamiliaDto.setAlumnosBasicosDto(MHelpers.modelMapper().map(alumnosFamilia.getAlumnosBasicos(), AlumnosBasicosDto.class));
+		alumnosFamiliaDto.setTipoIdentMadDto(MHelpers.modelMapper().map(alumnosFamilia.getTipoIdentPad(), TiposIdentificacionDto.class));
+		alumnosFamiliaDto.setTipoIdentPadDto(MHelpers.modelMapper().map(alumnosFamilia.getTipoIdentPad(), TiposIdentificacionDto.class));
+		alumnosFamiliaDto.setTipoIdentAcuDto(MHelpers.modelMapper().map(alumnosFamilia.getTipoIdentAcu(), TiposIdentificacionDto.class));
+		alumnosFamiliaDto.setProfesionMadreDto(MHelpers.modelMapper().map(alumnosFamilia.getProfesionMadre(), ProfesionesDto.class));
+		alumnosFamiliaDto.setProfPadDto(MHelpers.modelMapper().map(alumnosFamilia.getProfesionMadre(), ProfesionesDto.class));
+		alumnosFamiliaDto.setProfesionAcuDto(MHelpers.modelMapper().map(alumnosFamilia.getProfesionAcu(), ProfesionesDto.class));
+		alumnosFamiliaDto.setCiudadExpedMadDto(MHelpers.modelMapper().map(alumnosFamilia.getCiudadExpedMad(), CiudadesDto.class));
+		alumnosFamiliaDto.setCiudadExpedPadDto(MHelpers.modelMapper().map(alumnosFamilia.getCiudadExpedPad(), CiudadesDto.class));
+		alumnosFamiliaDto.setCiudadExpedAcuDto(MHelpers.modelMapper().map(alumnosFamilia.getCiudadExpedAcu(), CiudadesDto.class));
+		alumnosFamiliaDto.setBarrioResMadDto(MHelpers.modelMapper().map(alumnosFamilia.getBarrioResMad(), BarriosDto.class));
+		alumnosFamiliaDto.setBarrioResPadDto(MHelpers.modelMapper().map(alumnosFamilia.getBarrioResPad(), BarriosDto.class));
 
 		return alumnosFamiliaDto;
 	}

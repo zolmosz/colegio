@@ -9,5 +9,5 @@ import com.uan.colegio.entity.AlumnosDocumentos;
 
 @Configuration
 public interface AlumnosDocumentosDao extends CrudRepository<AlumnosDocumentos, UUID>{
-
+    AlumnosDocumentos findByAlumnosBasicos_AbLlave(UUID abLlave);
 }

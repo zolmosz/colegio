@@ -7,6 +7,7 @@ import com.uan.colegio.commons.GenericService;
 import com.uan.colegio.dto.AlumnosBasicosDto;
 import com.uan.colegio.entity.AlumnosBasicos;
 
+
 public interface AlumnosBasicosService extends GenericService<AlumnosBasicos, UUID>{
 	public List<AlumnosBasicosDto> findAll();
 	public AlumnosBasicosDto findByid(UUID id);
@@ -14,4 +15,5 @@ public interface AlumnosBasicosService extends GenericService<AlumnosBasicos, UU
 	void delete(AlumnosBasicosDto alumnosBasicosDto);
 	void deleteById(UUID id);
 	public byte[] getFotoActual(UUID id);
+	public List<AlumnosBasicosDto> getAlumnosCompletos();
 }

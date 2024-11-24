@@ -10,6 +10,7 @@ import com.uan.colegio.entity.AlumnosDocumentos;
 public interface AlumnosDocumentosService extends GenericService<AlumnosDocumentos, UUID>{
 	public List<AlumnosDocumentosDto> findAll();
 	public AlumnosDocumentosDto findByid(UUID id);
+	public AlumnosDocumentosDto findByAlumnosBasicos_AbLlave(UUID id);
 	public AlumnosDocumentosDto save(AlumnosDocumentosDto alumnosDocumentosDto) ;
 	void delete(AlumnosDocumentosDto alumnosDocumentosDto);
 	void deleteById(UUID id);

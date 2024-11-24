@@ -2,12 +2,6 @@
  * 
  */
 $(document).ready(function() {
-//	$('.dataTable .delBtn').on('click', function(event) {
-//		event.preventDefault();
-//		var href = $(this).attr('href');
-//		$('#deleteModal #delRef').attr('href', href);
-//		$('#deleteModal').modal();
-//	});
 	
 	$('#deleteModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Botón que abrió el modal
@@ -61,12 +55,15 @@ $(document).ready(function() {
 
 });
 
-function nextStep(step) {
+function nextStep(step,percent) {
   document.querySelectorAll('.form-step').forEach(el => el.classList.add('d-none'));
   document.getElementById('step' + step).classList.remove('d-none');
-  document.getElementById('progressBar').style.width = (step * 33) + '%';
+  document.getElementById('progressBar').style.width = (step * percent) + '%';
 }
 
-function prevStep(step) {
-  nextStep(step);
+function prevStep(step,percent) {
+  nextStep(step,percent);
 }
+
+
+

@@ -37,4 +37,32 @@ public class AlumnosBasicosDto {
 	private GradosDto gradosDto;
 	private String abEstado;
 	private byte[] abFotoImg;
+	private String estadoClase;
+	private String estadoTexto;
+
+	public static String getClaseEstado(String estado) {
+        switch (estado) {
+            case "REG":
+                return "badge bg-warning p-2 text-white bg-opacity-75 rounded-pill";
+            case "ADM":
+                return "badge bg-success p-2 text-white bg-opacity-75 rounded-pill";
+            case "REC":
+                return "badge bg-danger p-2 text-white bg-opacity-75 rounded-pill";
+            default:
+                return "";
+        }
+    }
+
+    public static String getTextoEstado(String estado) {
+        switch (estado) {
+            case "REG":
+                return "REGISTRADO";
+            case "ADM":
+                return "ADMITIDO";
+            case "REC":
+                return "RECHAZADO";
+            default:
+                return "";
+        }
+    }
 }

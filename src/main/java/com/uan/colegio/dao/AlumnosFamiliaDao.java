@@ -7,7 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.uan.colegio.entity.AlumnosFamilia;
 
+
 @Configuration
 public interface AlumnosFamiliaDao extends CrudRepository<AlumnosFamilia, UUID>{
-
+    AlumnosFamilia findByAlumnosBasicos_AbLlave(UUID abLlave);
 }
