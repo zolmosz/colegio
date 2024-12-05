@@ -59,13 +59,11 @@
                         </h6>
                       </div>
                       <div class="card-body">
-                        <form
+                        <!-- <form
                           th:object="${alumnoscom}"
-                          th:action="@{/views/alumnosadmis/salvar}"
-                          method="post"
-                        >
+                        > -->
                           <!-- Paso 1 -->
-                          <div class="form-step" id="step1">
+                          <div th:object="${alumnoscom}" class="form-step" id="step1">
                             
                             <div class="card-body">
                               <div class="">
@@ -171,7 +169,7 @@
                             </div>
                           </div>
                           <!-- Paso 2 -->
-                          <div class="form-step d-none" id="step2">
+                          <div th:object="${alumnoscom}" class="form-step d-none" id="step2">
                             <!-- Campos de formulario del paso 2 -->
                             <div class="card-body">
                               <div class="">
@@ -267,7 +265,7 @@
                           </div>
                         
                           <!-- Paso 3 -->
-                          <div class="form-step d-none" id="step3">
+                          <div th:object="${alumnoscom}" class="form-step d-none" id="step3">
                             <!-- Campos de formulario del paso 3 -->
                             <div class="card-body">
                               <div class="">
@@ -362,7 +360,7 @@
                             </div>
                           </div>
                           <!-- Paso 4 -->
-                          <div class="form-step d-none" id="step4">
+                          <div th:object="${alumnoscom}" class="form-step d-none" id="step4">
                             <!-- Campos de formulario del paso 4 -->
                             <div class="card-body">
                               <div class="">
@@ -437,7 +435,7 @@
                             </div>
                           </div>
                           <!-- Paso 5 -->
-                          <div class="form-step d-none" id="step5">
+                          <div th:object="${alumnoscom}" class="form-step d-none" id="step5">
                             <div class="card-body">
                               <div class="">
                                 <h5 class="mb-4 font-weight-bold text-primary">
@@ -447,11 +445,30 @@
                               <div class="form-row">
                                 <div class="form-group col-md-6 ">
                                   <label class="font-weight-bold">Alumno: </label>
+                                  <input type="hidden" th:field="*{alumnosBasicosDto.abLlave}" />
                                   <label th:text="*{alumnosBasicosDto.abNombres}+' '+*{alumnosBasicosDto.abApellidos}" />
                                 </div>
                                 <div class="col-md-6">
                                   <label class="font-weight-bold">Colegio:</label>
                                   <label th:text="*{alumnosBasicosDto.colegiosDto.coNombre}"></label>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-8">
+                                  <label class=" mb-1" >Formulario Inscripción Matricula</label>
+                                </div>
+                                <div class="col-md-4">
+                                  <a th:if="*{alumnosDocumentosDto.adFormInscripcionMatricula != null}"
+                                      class="verDocBtn"
+                                      href="#"
+                                      data-toggle="modal"
+                                      data-target="#verDocModal"
+                                      th:data-tipodoc="formIns"
+                                      th:data-imgdoc="${b64IformIns}"
+                                      >
+                                        <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                  </a>
+                                    <img th:if="*{alumnosDocumentosDto.adFormInscripcionMatricula == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
                                 </div>
                               </div>
                               <div class="form-row">
@@ -527,14 +544,132 @@
                                     <img th:if="*{alumnosDocumentosDto.adFotos == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
                                 </div>
                               </div>
+                              <div class="form-row">
+                                <div class="col-md-8">
+                                  <label class=" mb-1" >Certificado de Crecimiento y Desarrollo</label>
+                                </div>
+                                <div class="col-md-4">
+                                  <a th:if="*{alumnosDocumentosDto.adCertCrecimientoDesarrollo != null}"
+                                      class="verDocBtn"
+                                      href="#"
+                                      data-toggle="modal"
+                                      data-target="#verDocModal"
+                                      th:data-tipodoc="certCd"
+                                      th:data-imgdoc="${b64IcertCd}"
+                                      >
+                                        <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                  </a>
+                                    <img th:if="*{alumnosDocumentosDto.adCertCrecimientoDesarrollo == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-8">
+                                  <label class=" mb-1" >Certificado Valoración Visual y Auditiva</label>
+                                </div>
+                                <div class="col-md-4">
+                                  <a th:if="*{alumnosDocumentosDto.adCertValoracionVisualAuditiva != null}"
+                                      class="verDocBtn"
+                                      href="#"
+                                      data-toggle="modal"
+                                      data-target="#verDocModal"
+                                      th:data-tipodoc="certVa"
+                                      th:data-imgdoc="${b64IcertVa}"
+                                      >
+                                        <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                  </a>
+                                    <img th:if="*{alumnosDocumentosDto.adCertValoracionVisualAuditiva == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-8">
+                                  <label class=" mb-1" >Cédula de Ciudadanía Madre</label>
+                                </div>
+                                <div class="col-md-4">
+                                  <a th:if="*{alumnosDocumentosDto.adCedulaMadre != null}"
+                                      class="verDocBtn"
+                                      href="#"
+                                      data-toggle="modal"
+                                      data-target="#verDocModal"
+                                      th:data-tipodoc="cedMad"
+                                      th:data-imgdoc="${b64IcedMad}"
+                                      >
+                                        <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                  </a>
+                                    <img th:if="*{alumnosDocumentosDto.adCedulaMadre == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-8">
+                                  <label class=" mb-1" >Cédula de Ciudadanía Padre</label>
+                                </div>
+                                <div class="col-md-4">
+                                  <a th:if="*{alumnosDocumentosDto.adCedulaPadre != null}"
+                                      class="verDocBtn"
+                                      href="#"
+                                      data-toggle="modal"
+                                      data-target="#verDocModal"
+                                      th:data-tipodoc="cedPad"
+                                      th:data-imgdoc="${b64IcedPad}"
+                                      >
+                                        <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                  </a>
+                                    <img th:if="*{alumnosDocumentosDto.adCedulaPadre == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="col-md-8">
+                                  <label class=" mb-1" >Contrato de Prestación de Servicios</label>
+                                </div>
+                                <div class="col-md-4">
+                                  <a th:if="*{alumnosDocumentosDto.adContratoPrestServicios != null}"
+                                      class="verDocBtn"
+                                      href="#"
+                                      data-toggle="modal"
+                                      data-target="#verDocModal"
+                                      th:data-tipodoc="contServ"
+                                      th:data-imgdoc="${b64IcontServ}"
+                                      >
+                                        <img th:src="@{/img/pdf.png}" alt="Dynamic Image" width="40" height="40">
+                                  </a>
+                                    <img th:if="*{alumnosDocumentosDto.adContratoPrestServicios == null}" th:src="@{/img/sin-documento.png}" alt="Default Image" width="25" height="25">
+                                </div>
+                              </div>
+                              
                             </div>
-                            <div class="card-footer">
-                              <button type="button" class="btn btn-secondary" onclick="prevStep(4,20)">Anterior</button>
-                              <button type="submit" class="btn btn-primary">Enviar</button>
+                            <div class="card-footer d-flex">
+                              <div class="d-flex flex-row justify-content-between">
+                                <button type="button" class="btn btn-secondary" onclick="prevStep(4,20)">Anterior</button>
+
+                                <!-- Formulario para aceptar al estudiante -->
+                                <!-- <form th:action="@{/views/alumnosadmis/actEstadoAprobado/{id}(id=*{alumnosBasicosDto.abLlave})}" method="post" style="display:inline;">
+                                  <button type="submit" class="btn btn-link" style="padding:0; border:none; background:none;">
+                                    <i class="far fa-check-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                       title="Aceptar Estudiante" style="font-size:48px;color:green;"></i>
+                                  </button>
+                                </form> -->
+                                <a
+                                  th:href="@{/views/alumnosadmis/actEstadoAprobado/{id}(id=*{alumnosBasicosDto.abLlave})}">
+                                    <i class="far fa-check-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    title="Aceptar Estudiante" style="font-size:48px;color:green;"></i>
+                                </a>
+                            
+                                <!-- Formulario para rechazar al estudiante -->
+                                <!-- <form th:action="@{/views/alumnosadmis/actEstadoRechazado/{id}(id=*{alumnosBasicosDto.abLlave})}" method="post" style="display:inline;">
+                                  <button type="submit" class="btn btn-link" style="padding:0; border:none; background:none;">
+                                    <i class="far fa-times-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                       title="Rechazar Estudiante" style="font-size:48px;color:red;"></i>
+                                  </button>
+                                </form> -->
+                                <a
+                                  th:href="@{/views/alumnosadmis/actEstadoRechazado/{id}(id=*{alumnosBasicosDto.abLlave})}">
+                                  <i class="far fa-times-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                  title="Rechazar Estudiante" style="font-size:48px;color:red;"></i>
+                                </a>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </form>
+                      <!-- </form> -->
                     </div>
                   </div>
                 </div>
@@ -575,6 +710,7 @@
     </div>
     <!-- Fin Modal -->
     <!-- Bootstrap core JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script th:src="@{/js/main.js}"></script>
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
     <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>

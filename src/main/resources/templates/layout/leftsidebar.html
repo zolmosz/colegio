@@ -113,7 +113,7 @@
 					aria-labelledby="headingCurs" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Opciones:</h6>
-						<a class="collapse-item" href="login.html">Cursos</a>
+						<a class="collapse-item" th:href="@{/views/cursos/}">Cursos</a>
 						<a class="collapse-item" href="register.html">Alumnos por Curso</a>
 					</div>
 				</div></li>
@@ -122,7 +122,7 @@
 			<hr class="sidebar-divider d-none d-md-block">
 			
 			<!-- Nav Item - Notas Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="#"
+			<!-- <li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseNotas"
 				aria-expanded="true" aria-controls="collapseNotas"> <i
 					class="fas fa-user-circle"></i> <span>Notas</span>
@@ -131,11 +131,37 @@
 					aria-labelledby="headingNotas" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Opciones:</h6>
-						<a class="collapse-item" href="login.html">Parametros</a>
+						<a class="collapse-item" href="login.html">Parametros 1</a>
 						<div class="collapse-divider"></div>
 						<a class="collapse-item" href="register.html">Proceso Calificación</a>						
 					</div>
-				</div></li>
+				</div></li> -->
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNotas" 
+					   aria-expanded="false" aria-controls="collapseNotas">
+					  <i class="fas fa-user-circle"></i> 
+					  <span>Notas</span>
+					</a>
+					<div id="collapseNotas" class="collapse" aria-labelledby="headingNotas" data-parent="#accordionSidebar">
+					  <div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Opciones:</h6>
+						<!-- Primer nivel de opciones -->
+						<a class="collapse-item" href="login.html">Parámetros 1</a>
+						<div class="collapse-divider"></div>
+						<!-- Submenú anidado -->
+						<a class="collapse-item collapsed" href="#" data-toggle="collapse" data-target="#subProcesoCalificacion" 
+						   aria-expanded="false" aria-controls="subProcesoCalificacion">
+						  Proceso Calificación
+						</a>
+						<div id="subProcesoCalificacion" class="collapse" aria-labelledby="headingSubProceso" data-parent="#collapseNotas">
+						  <div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" href="calificacion-parcial.html">Calificación Parcial</a>
+							<a class="collapse-item" href="calificacion-final.html">Calificación Final</a>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </li>
 				
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">

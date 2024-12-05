@@ -16,4 +16,5 @@ public interface AlumnosBasicosService extends GenericService<AlumnosBasicos, UU
 	void deleteById(UUID id);
 	public byte[] getFotoActual(UUID id);
 	public List<AlumnosBasicosDto> getAlumnosCompletos();
+	public void updateEstado(UUID id, String Estado);
 }

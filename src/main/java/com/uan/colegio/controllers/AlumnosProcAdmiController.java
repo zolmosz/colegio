@@ -20,6 +20,7 @@ import com.uan.colegio.dto.ColegiosDto;
 import com.uan.colegio.dto.ProfesionesDto;
 import com.uan.colegio.dto.TiposIdentificacionDto;
 import com.uan.colegio.entity.AlumnosBasicos;
+import com.uan.colegio.enums.EstadosAlumnosEnum;
 import com.uan.colegio.service.AlumnosBasicosService;
 import com.uan.colegio.service.AlumnosDocumentosService;
 import com.uan.colegio.service.AlumnosFamiliaService;
@@ -35,6 +36,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 
 @Controller
 @RequestMapping("/views/alumnosadmis")
@@ -111,5 +116,28 @@ public class AlumnosProcAdmiController {
 		
 		return "redirect:/views/alumnosadmis/";
 	}
+
+	@GetMapping("/actEstadoAprobado/{id}")
+	public String actualizaEstadoAprobado(@PathVariable("id") UUID idAlumno,  Model model) {
+		
+		AlumnosBasicosDto alumnosBasicosDto = alumnosBasicosrv.findByid(idAlumno);
+		// alumnosBasicosrv.updateEstado(alumnosBasicosDto.getAbLlave(), EstadosAlumnosEnum.ADMITIDO.getEstado());
+		alumnosBasicosDto.setAbEstado(EstadosAlumnosEnum.ADMITIDO.getEstado());
+		alumnosBasicosrv.save(alumnosBasicosDto);
+
+		return "redirect:/views/alumnosadmis/";
+	}
+
+	@GetMapping("/actEstadoRechazado/{id}")
+	public String actualizaEstadoRechazado(@PathVariable("id") UUID idAlumno,  Model model) {
+		
+		AlumnosBasicosDto alumnosBasicosDto = alumnosBasicosrv.findByid(idAlumno);
+		// alumnosBasicosrv.updateEstado(alumnosBasicosDto.getAbLlave(), EstadosAlumnosEnum.RECHAZADO.getEstado());
+		alumnosBasicosDto.setAbEstado(EstadosAlumnosEnum.RECHAZADO.getEstado());
+		alumnosBasicosrv.save(alumnosBasicosDto);
+
+		return "redirect:/views/alumnosadmis/";
+	}
+	
 	
 }

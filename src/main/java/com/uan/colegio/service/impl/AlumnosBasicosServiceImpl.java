@@ -12,24 +12,16 @@ import org.springframework.stereotype.Service;
 import com.uan.colegio.commons.impl.GenericServiceImpl;
 import com.uan.colegio.dao.AlumnosBasicosDao;
 import com.uan.colegio.dto.AlumnosBasicosDto;
-import com.uan.colegio.dto.AlumnosCompletoDto;
 import com.uan.colegio.dto.ColegiosDto;
 import com.uan.colegio.dto.EpsDto;
 import com.uan.colegio.dto.GradosDto;
 import com.uan.colegio.dto.HorariosDto;
 import com.uan.colegio.dto.TiposIdentificacionDto;
 import com.uan.colegio.entity.AlumnosBasicos;
-import com.uan.colegio.entity.AlumnosDocumentos;
-import com.uan.colegio.entity.AlumnosFamilia;
 import com.uan.colegio.service.AlumnosBasicosService;
 import com.uan.colegio.utils.MHelpers;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Join;
-import jakarta.persistence.criteria.JoinType;
-import jakarta.persistence.criteria.Root;
 
 @Service
 public class AlumnosBasicosServiceImpl extends GenericServiceImpl<AlumnosBasicos, UUID> implements AlumnosBasicosService {
@@ -158,4 +150,7 @@ public class AlumnosBasicosServiceImpl extends GenericServiceImpl<AlumnosBasicos
 		return listaalumnosBasicosDto;
 	}
 
+	public void updateEstado(UUID id, String estado) {
+        AlumnosBasicosDao.updateEstado(id, estado);
+    }
 }
