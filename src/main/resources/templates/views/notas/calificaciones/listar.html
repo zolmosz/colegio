@@ -81,14 +81,15 @@
 													</td>
 													<td th:text="${ca.colegiosDto.coNombre}"></td>
 													<td><a
-														th:href="@{/views/notas/calificaciones/editar/{id}(id=${cu.cuLlave})}">
+														th:href="@{/views/notas/calificaciones/editar/{id}(id=${ca.caLlave})}">
 															<i class="fas fa-pencil-alt fa-sm fa-fw mr-2 "
 															style="color: orange;"></i>
 													</a> </td>
 													<td> 
-													<a th:href="@{/views/notas/calificaciones/eliminar/(id=${cu.cuLlave})}"
+													<a th:href="@{/views/notas/calificaciones/eliminar/(id=${ca.caLlave})}"
 														class="delBtn" data-toggle="modal"
-														data-target="#deleteModal" th:data-userid="${cu.cuLlave}"
+														data-target="#deleteModal" th:data-userid="${ca.caLlave}"
+														th:data-modulo="notas"
 														th:data-opcion="calificaciones">
 															<i class="fas fa-trash fa-sm fa-fw mr-2 "
 															style="color: red;"></i>

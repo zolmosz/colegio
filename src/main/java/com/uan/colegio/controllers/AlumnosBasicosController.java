@@ -107,6 +107,7 @@ public class AlumnosBasicosController {
 			byte[] fotoActual = alumnosBasicossrv.getFotoActual(alumnosBasicosDto.getAbLlave());
 			alumnosBasicosDto.setAbFotoImg(fotoActual);
 		}
+		
 		alumnosBasicosDto.setAbEstado(EstadosAlumnosEnum.REGISTRADO.getEstado());
 			
 		alumnosBasicossrv.save(alumnosBasicosDto);

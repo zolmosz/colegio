@@ -24,9 +24,9 @@ public class Calificaciones {
     @ManyToOne
     @JoinColumn(name = "ca_colegio")
 	private Colegios colegios;
-    private Integer caCodigo;
+    private String caCodigo;
     private String caDescripcion;
     private Integer caValor;
-    private String caImagen;
+    private byte[] caImagen;
     private Boolean caEstado;
 }

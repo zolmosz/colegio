@@ -6,11 +6,16 @@ $(document).ready(function() {
 	$('#deleteModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Botón que abrió el modal
         var countryId = button.data('userid'); // Capturamos el valor de data-userid
+        var modulo = button.data('modulo');
         var opcion = button.data('opcion');
 		
         // Actualizamos el enlace "Eliminar" dentro del modal con el ID capturado
         var modal = $(this);
-        modal.find('#delRef').attr('href', '/views/'+opcion+'/eliminar/' + countryId);
+        if (modulo != null){
+          modal.find('#delRef').attr('href', '/views/'+modulo+'/'+opcion+'/eliminar/' + countryId);
+        }else{
+          modal.find('#delRef').attr('href', '/views/'+opcion+'/eliminar/' + countryId);
+        }
     });
 
   $('#verDocModal').on('show.bs.modal', function (event) {

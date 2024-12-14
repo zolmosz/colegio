@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 public class CalificacionesDto {
     private UUID caLlave;
     private ColegiosDto colegiosDto;
-    private Integer caCodigo;
-    private String caDescripción;
+    private String caCodigo;
+    private String caDescripcion;
     private Integer caValor;
-    private String caImagen;
+    private byte[] caImagen;
     private Boolean caEstado;
 }
