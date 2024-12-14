@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<!-- <meta charset="ISO-8859-1"> -->
+<meta charset="UTF-8">
+<title></title>
+
+<!-- Custom fonts for this template-->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+	rel="stylesheet" type="text/css">
+<link th:href="@{/css/css.css}" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+
+</head>
+<body>
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<lu th:replace="layout/leftsidebar :: leftSide_bar"></lu>
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<nav th:replace="layout/topnavbar :: top_navbar"></nav>
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid" layout:fragment="page-content">
+					<!-- 									/.container-fluid -->
+					<h1 th:text="${titulo}"></h1>
+
+					<div class="row">
+						<div class="col-sm-12 col-md-12 col-lg-12">
+							<div class="card shadow mb-4" >
+								<!-- Card Header - Dropdown -->
+								<div
+									class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+									<h6 class="m-0 font-weight-bold text-primary">Crear Periodo</h6>
+								</div>
+								<div class="card-body">
+									<form th:object="${Periodos}" th:action="@{/views/notas/periodos/salvar}"
+										method="post">
+											<div class="col-md-6 mb-4" >
+												<input type="hidden" th:field="*{perLlave}">
+												<label for="perColegio">Colegio</label>
+												<select class="form-control" id="perColegio" th:field="*{colegiosDto.coLlave}">
+													<option th:each="col:${colegios}"
+														th:value="${col.coLlave}"
+														th:text="${col.coNombre}"
+													/>
+												</select>
+											</div>
+											<div class="form-row">
+												<div class="form-group col-md-6">
+													<label for="perCodigo">C�digo</label> <input type="text"
+														class="form-control" id="perCodigo"
+														placeholder="C�digo Periodo" th:field="*{perCodigo}">
+												</div>
+												<div class="form-group col-md-6">
+													<label for="perNombre">Nombre</label> <input
+														type="text" class="form-control" id="perNombre"
+														placeholder="Nombre periodo" th:field="*{perNombre}">
+												</div>
+												<div class="col-md-6 mb-4" >
+													<label for="perNumero">Numero</label> <input
+														type="text" class="form-control" id="perNumero"
+														placeholder="Numero periodo" th:field="*{perNumero}">
+												</div>
+												<div class="col-md-6 mb-4" >
+													<label for="perAnio">Anio</label> <input
+														type="text" class="form-control" id="perAnio"
+														placeholder="Digite el año correspondiente al periodo" th:field="*{perAnio}">
+												</div>
+												<div class="col-md-6">
+													<label class="small mb-1" for="perFecini">Fecha Inicial</label>
+													<div class="input-group ">
+													  <input
+														type="date"
+														class="form-control"
+														lang="en"
+														id="perFecini"
+														placeholder="Fecha Inicial"
+														th:field="*{perFecini}"
+													  />
+													</div>
+											  </div>
+											  <div class="col-md-6">
+												<label class="small mb-1" for="perFecfin">Fecha Final</label>
+												<div class="input-group ">
+												  <input
+													type="date"
+													class="form-control "
+													lang="en"
+													id="perFecfin"
+													placeholder="Fecha Final"
+													th:field="*{perFecfin}"
+												  />
+												</div>
+										  </div>
+												<div class="form-check form-switch col-md-3">                            
+													<input class="form-check-input" type="checkbox" id="perEstado" th:field="*{perEstado}">
+													<label for="perEstado" class="form-check-label" > Activo</label>
+												</div>
+											</div>
+										<div class="card-footer col-sm-12 col-md-12 col-lg-12 mb-3 mb-sm-0">
+											<input type="submit" class="btn btn-primary" value="Guardar">
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End of Main Content -->
+				<footer th:replace="layout/footer :: _footer"></footer>
+			</div>
+		</div>
+	</div>
+	<!-- End of Content Wrapper -->
+
+	<a th:replace="layout/modallogout :: stopbot"></a>
+
+	<div th:replace="layout/modallogout :: modal_logout"></div>
+
+	<!-- 	Modal para crear usuario -->
+
+	<!-- Fin Modal -->
+	<!-- Bootstrap core JavaScript-->
+	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+	<!-- Page level plugins -->
+	<script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+
+	<!-- Page level custom scripts -->
+	<script th:src="@{/js/demo/chart-area-demo.js}"></script>
+	<script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+</body>
+</html>
